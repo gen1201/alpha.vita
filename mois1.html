@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alpha Vita — Mois 1 · La Paix Intérieure</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sage: #7a9e7e;
+    --sage-light: #a8c5ac;
+    --sage-pale: #e8f0e9;
+    --sage-deep: #4a7050;
+    --gold: #c9a96e;
+    --gold-light: #e8d5b0;
+    --gold-pale: #f5ede0;
+    --rose: #c4a0a0;
+    --rose-pale: #f5eaea;
+    --stone: #8c8680;
+    --cream: #faf8f5;
+    --warm-white: #f5f2ed;
+    --dark: #2c2a27;
+    --mid: #5a5654;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 20px 48px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(250,248,245,0.93);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(122,158,126,0.12);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; font-weight: 300; letter-spacing: 0.05em;
+  }
+  .nav-logo em { color: var(--sage); font-style: italic; }
+  .nav-month {
+    font-size: 0.65rem; font-weight: 400;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold);
+    background: var(--gold-pale);
+    padding: 6px 18px; border-radius: 20px;
+  }
+  .nav-back {
+    font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--stone); text-decoration: none;
+    transition: color 0.3s;
+  }
+  .nav-back:hover { color: var(--sage); }
+
+  /* ── HERO MOIS ── */
+  #hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 120px 24px 80px;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(160deg, #f0f5f0 0%, var(--cream) 50%, #f5f0eb 100%);
+  }
+
+  .hero-number {
+    position: absolute;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(18rem, 35vw, 28rem);
+    font-weight: 300; font-style: italic;
+    color: rgba(122,158,126,0.06);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    white-space: nowrap;
+    animation: breathe 6s ease-in-out infinite;
+  }
+
+  .hero-wave {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 120px;
+    background: var(--cream);
+    clip-path: ellipse(55% 100% at 50% 100%);
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 0.63rem; font-weight: 400;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid var(--gold-light);
+    padding: 8px 24px; border-radius: 30px;
+    margin-bottom: 40px;
+    background: rgba(255,255,255,0.7);
+    animation: fadeUp 1s 0.2s both;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.7rem; font-weight: 400;
+    letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--sage); margin-bottom: 16px;
+    animation: fadeUp 1s 0.4s both;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 7vw, 6rem);
+    font-weight: 300; line-height: 1.1;
+    color: var(--dark); margin-bottom: 12px;
+    animation: fadeUp 1s 0.6s both;
+  }
+  .hero-title em { color: var(--sage); font-style: italic; }
+
+  .hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+    font-weight: 300; font-style: italic;
+    color: var(--gold); margin-bottom: 32px;
+    animation: fadeUp 1s 0.8s both;
+  }
+
+  .hero-intro {
+    max-width: 580px;
+    font-size: 1rem; font-weight: 300; line-height: 1.85;
+    color: var(--mid); margin-bottom: 56px;
+    animation: fadeUp 1s 1s both;
+  }
+
+  .hero-pillars {
+    display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;
+    animation: fadeUp 1s 1.2s both;
+  }
+
+  .hero-pillar {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 0.7rem; font-weight: 300;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--mid);
+    background: white;
+    padding: 10px 20px; border-radius: 30px;
+    border: 1px solid rgba(122,158,126,0.15);
+  }
+
+  /* ── NAVIGATION PROGRAMME ── */
+  .prog-nav {
+    position: sticky; top: 65px; z-index: 90;
+    background: rgba(250,248,245,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(122,158,126,0.1);
+    padding: 0 48px;
+    display: flex; gap: 0;
+    overflow-x: auto;
+  }
+
+  .prog-nav a {
+    display: flex; align-items: center; gap: 8px;
+    padding: 18px 28px;
+    font-size: 0.68rem; font-weight: 400;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--stone); text-decoration: none;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: all 0.3s;
+  }
+  .prog-nav a:hover, .prog-nav a.active {
+    color: var(--sage);
+    border-bottom-color: var(--sage);
+  }
+
+  /* ── SECTIONS CONTENU ── */
+  .content-section {
+    padding: 100px 24px;
+    max-width: 1000px; margin: 0 auto;
+  }
+
+  .section-header {
+    display: flex; align-items: flex-start; gap: 32px;
+    margin-bottom: 64px;
+  }
+
+  .section-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5rem; font-weight: 300; font-style: italic;
+    color: rgba(122,158,126,0.15);
+    line-height: 1; flex-shrink: 0;
+    margin-top: -8px;
+  }
+
+  .section-info {}
+
+  .section-tag {
+    display: inline-block;
+    font-size: 0.6rem; font-weight: 500;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    padding: 5px 14px; border-radius: 20px;
+    margin-bottom: 14px;
+  }
+  .tag-meditation { background: var(--sage-pale); color: var(--sage-deep); }
+  .tag-temoignage { background: var(--rose-pale); color: #8a5a5a; }
+  .tag-bienetre { background: var(--gold-pale); color: #8a6a30; }
+  .tag-defi { background: #eae8f5; color: #5a5080; }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 300; line-height: 1.2;
+    color: var(--dark); margin-bottom: 12px;
+  }
+  .section-title em { color: var(--sage); font-style: italic; }
+
+  .section-subtitle {
+    font-size: 0.85rem; font-weight: 300;
+    color: var(--stone); letter-spacing: 0.05em;
+  }
+
+  /* ── MÉDITATION ── */
+  #meditation { background: linear-gradient(180deg, var(--cream) 0%, #edf3ee 100%); padding: 100px 24px; }
+
+  .meditation-inner { max-width: 1000px; margin: 0 auto; }
+
+  .meditation-card {
+    background: white;
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 2px 40px rgba(122,158,126,0.08);
+    margin-bottom: 32px;
+  }
+
+  .meditation-header {
+    background: linear-gradient(135deg, #2c3e2d 0%, #3d5c3e 100%);
+    padding: 48px;
+    color: var(--cream);
+    display: flex; align-items: center; gap: 32px;
+  }
+
+  .meditation-icon-wrap {
+    width: 80px; height: 80px; flex-shrink: 0;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.5rem;
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+
+  .meditation-header h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; font-weight: 300;
+    margin-bottom: 8px;
+  }
+  .meditation-header p {
+    font-size: 0.85rem; font-weight: 300;
+    color: rgba(250,248,245,0.65);
+    line-height: 1.6;
+  }
+
+  .meditation-duration {
+    display: flex; align-items: center; gap: 6px;
+    margin-top: 12px;
+    font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--gold-light);
+  }
+
+  .meditation-body { padding: 48px; }
+
+  .meditation-steps {
+    display: flex; flex-direction: column; gap: 28px;
+    margin-bottom: 40px;
+  }
+
+  .med-step {
+    display: flex; gap: 24px; align-items: flex-start;
+  }
+
+  .med-step-num {
+    width: 36px; height: 36px; flex-shrink: 0;
+    background: var(--sage-pale);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem; font-weight: 400;
+    color: var(--sage-deep);
+  }
+
+  .med-step-content {}
+  .med-step-title {
+    font-size: 0.8rem; font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--sage); margin-bottom: 8px;
+  }
+  .med-step-text {
+    font-size: 0.92rem; font-weight: 300;
+    line-height: 1.8; color: var(--mid);
+    font-style: italic;
+  }
+
+  .meditation-audio {
+    background: var(--sage-pale);
+    border-radius: 16px;
+    padding: 24px 28px;
+    display: flex; align-items: center; gap: 20px;
+  }
+
+  .audio-play {
+    width: 52px; height: 52px; flex-shrink: 0;
+    background: var(--sage);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: none;
+    font-size: 1.2rem; color: white;
+  }
+  .audio-play:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(122,158,126,0.35); }
+
+  .audio-info {}
+  .audio-title {
+    font-size: 0.85rem; font-weight: 400;
+    color: var(--dark); margin-bottom: 4px;
+  }
+  .audio-sub {
+    font-size: 0.72rem; font-weight: 300;
+    color: var(--stone);
+  }
+
+  .audio-bar {
+    flex: 1;
+    height: 3px;
+    background: rgba(122,158,126,0.2);
+    border-radius: 3px;
+    position: relative;
+    overflow: hidden;
+  }
+  .audio-progress {
+    position: absolute; top: 0; left: 0;
+    height: 100%; width: 35%;
+    background: var(--sage);
+    border-radius: 3px;
+  }
+
+  /* ── TÉMOIGNAGE ── */
+  #temoignage { padding: 100px 24px; background: var(--cream); }
+
+  .temoignage-inner { max-width: 1000px; margin: 0 auto; }
+
+  .temo-layout {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 40px; margin-top: 20px;
+  }
+
+  .temo-story {
+    background: white; border-radius: 24px;
+    padding: 48px; grid-column: 1 / -1;
+    border: 1px solid rgba(196,160,160,0.15);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .temo-story::before {
+    content: '"';
+    position: absolute; top: 20px; left: 36px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 10rem; line-height: 1;
+    color: rgba(196,160,160,0.12);
+    font-style: italic;
+  }
+
+  .temo-story-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+    font-weight: 300; font-style: italic;
+    line-height: 1.75; color: var(--dark);
+    margin-bottom: 32px;
+    position: relative; z-index: 1;
+  }
+
+  .temo-story-text strong {
+    color: var(--sage); font-style: normal; font-weight: 400;
+  }
+
+  .temo-author-block {
+    display: flex; align-items: center; gap: 20px;
+    position: relative; z-index: 1;
+  }
+
+  .temo-avatar {
+    width: 52px; height: 52px;
+    background: linear-gradient(135deg, var(--rose-pale), var(--rose));
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem; flex-shrink: 0;
+  }
+
+  .temo-author-name {
+    font-size: 0.85rem; font-weight: 400;
+    color: var(--dark); margin-bottom: 4px;
+  }
+  .temo-author-info {
+    font-size: 0.72rem; font-weight: 300;
+    color: var(--stone); letter-spacing: 0.05em;
+  }
+
+  .temo-message {
+    background: var(--rose-pale);
+    border-radius: 20px;
+    padding: 32px;
+    border-left: 3px solid var(--rose);
+  }
+
+  .temo-message-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; font-weight: 400;
+    color: var(--dark); margin-bottom: 16px;
+  }
+
+  .temo-message-body {
+    font-size: 0.88rem; font-weight: 300;
+    line-height: 1.8; color: var(--mid);
+  }
+
+  .temo-message-body p + p { margin-top: 12px; }
+
+  /* ── BIEN-ÊTRE ── */
+  #bienetre { background: var(--gold-pale); padding: 100px 24px; }
+
+  .bienetre-inner { max-width: 1000px; margin: 0 auto; }
+
+  .bienetre-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 24px; margin-top: 20px;
+  }
+
+  .be-card {
+    background: white; border-radius: 24px;
+    padding: 36px;
+    border: 1px solid rgba(201,169,110,0.12);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .be-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(201,169,110,0.15); }
+
+  .be-card-icon { font-size: 2.2rem; margin-bottom: 20px; }
+
+  .be-card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-weight: 400;
+    color: var(--dark); margin-bottom: 16px;
+  }
+
+  .be-card-intro {
+    font-size: 0.85rem; font-weight: 300;
+    color: var(--mid); line-height: 1.75;
+    margin-bottom: 20px;
+  }
+
+  .be-tips { display: flex; flex-direction: column; gap: 10px; }
+
+  .be-tip {
+    display: flex; align-items: flex-start; gap: 12px;
+    font-size: 0.83rem; font-weight: 300;
+    color: var(--mid); line-height: 1.6;
+  }
+
+  .be-tip-dot {
+    width: 6px; height: 6px; flex-shrink: 0;
+    background: var(--gold);
+    border-radius: 50%; margin-top: 7px;
+  }
+
+  .be-highlight {
+    background: linear-gradient(135deg, var(--warm-white), var(--gold-pale));
+    border-radius: 20px; padding: 32px;
+    border: 1px solid rgba(201,169,110,0.2);
+    grid-column: 1 / -1;
+    display: flex; gap: 24px; align-items: center;
+  }
+
+  .be-highlight-icon { font-size: 3rem; flex-shrink: 0; }
+
+  .be-highlight-text {}
+  .be-highlight-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; font-weight: 400;
+    color: var(--dark); margin-bottom: 8px;
+  }
+  .be-highlight-body {
+    font-size: 0.85rem; font-weight: 300;
+    color: var(--mid); line-height: 1.75;
+    font-style: italic;
+  }
+
+  /* ── DÉFI DU MOIS ── */
+  #defi { padding: 100px 24px; background: var(--cream); }
+
+  .defi-inner { max-width: 1000px; margin: 0 auto; }
+
+  .defi-hero {
+    background: linear-gradient(135deg, #3d3060 0%, #2a2040 100%);
+    border-radius: 28px; padding: 64px;
+    text-align: center; color: var(--cream);
+    position: relative; overflow: hidden;
+    margin-bottom: 32px;
+  }
+
+  .defi-hero::before {
+    content: '🌸';
+    position: absolute;
+    font-size: 18rem; opacity: 0.04;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .defi-hero-badge {
+    display: inline-block;
+    font-size: 0.6rem; font-weight: 400;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    color: #c4b8e8;
+    border: 1px solid rgba(196,184,232,0.3);
+    padding: 7px 20px; border-radius: 20px;
+    margin-bottom: 32px;
+  }
+
+  .defi-hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 300; line-height: 1.2;
+    margin-bottom: 20px;
+  }
+  .defi-hero-title em { color: #c4b8e8; font-style: italic; }
+
+  .defi-hero-desc {
+    font-size: 0.95rem; font-weight: 300;
+    line-height: 1.85; color: rgba(250,248,245,0.75);
+    max-width: 580px; margin: 0 auto;
+    position: relative; z-index: 1;
+  }
+
+  .defi-weeks {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  .week-card {
+    background: white; border-radius: 20px;
+    padding: 28px 24px;
+    border: 1px solid rgba(90,80,120,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+  }
+  .week-card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(90,80,120,0.1); }
+
+  .week-number {
+    font-size: 0.58rem; font-weight: 500;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: #8a78b8; margin-bottom: 12px;
+  }
+
+  .week-icon { font-size: 2rem; margin-bottom: 14px; }
+
+  .week-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; font-weight: 400;
+    color: var(--dark); margin-bottom: 10px; line-height: 1.3;
+  }
+
+  .week-desc {
+    font-size: 0.78rem; font-weight: 300;
+    color: var(--mid); line-height: 1.65;
+  }
+
+  .week-check {
+    display: flex; align-items: center; gap: 8px;
+    margin-top: 16px;
+    font-size: 0.7rem; font-weight: 300;
+    color: var(--stone);
+  }
+
+  .checkbox {
+    width: 18px; height: 18px;
+    border: 1.5px solid rgba(90,80,120,0.25);
+    border-radius: 5px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; flex-shrink: 0;
+    transition: all 0.2s;
+  }
+  .checkbox.done {
+    background: #8a78b8;
+    border-color: #8a78b8;
+    color: white; font-size: 0.6rem;
+  }
+
+  /* ── LETTRE ── */
+  #lettre { background: var(--warm-white); padding: 100px 24px; }
+
+  .lettre-inner {
+    max-width: 680px; margin: 0 auto;
+  }
+
+  .lettre-card {
+    background: white;
+    border-radius: 24px; padding: 60px;
+    border: 1px solid rgba(122,158,126,0.1);
+    box-shadow: 0 4px 30px rgba(0,0,0,0.04);
+  }
+
+  .lettre-from {
+    font-size: 0.62rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 32px;
+  }
+
+  .lettre-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; font-weight: 300; font-style: italic;
+    color: var(--dark); margin-bottom: 32px; line-height: 1.3;
+  }
+
+  .lettre-body {
+    font-size: 0.95rem; font-weight: 300;
+    line-height: 1.9; color: var(--mid);
+  }
+  .lettre-body p + p { margin-top: 20px; }
+  .lettre-body strong { color: var(--sage); font-weight: 400; }
+
+  .lettre-signature {
+    margin-top: 40px; padding-top: 32px;
+    border-top: 1px solid rgba(122,158,126,0.1);
+  }
+
+  .lettre-sig-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-weight: 300; font-style: italic;
+    color: var(--sage);
+  }
+
+  .lettre-sig-sub {
+    font-size: 0.72rem; font-weight: 300;
+    color: var(--stone); margin-top: 4px;
+    letter-spacing: 0.08em;
+  }
+
+  /* ── FOOTER DU PROGRAMME ── */
+  .prog-footer {
+    background: var(--dark); color: var(--cream);
+    padding: 60px 24px; text-align: center;
+  }
+
+  .prog-footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; font-weight: 300;
+    margin-bottom: 8px;
+  }
+  .prog-footer-logo em { color: var(--sage); font-style: italic; }
+
+  .prog-footer p {
+    font-size: 0.8rem; font-weight: 300;
+    color: rgba(250,248,245,0.45);
+    max-width: 560px; margin: 16px auto 0;
+    line-height: 1.7;
+  }
+
+  .prog-footer-nav {
+    display: flex; gap: 24px; justify-content: center;
+    margin: 32px 0;
+    flex-wrap: wrap;
+  }
+  .prog-footer-nav a {
+    font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: rgba(250,248,245,0.4); text-decoration: none;
+    transition: color 0.3s;
+  }
+  .prog-footer-nav a:hover { color: var(--sage-light); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes breathe {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+    50% { transform: translate(-50%, -50%) scale(1.04); opacity: 1; }
+  }
+
+  .reveal {
+    opacity: 0; transform: translateY(36px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    .temo-layout { grid-template-columns: 1fr; }
+    .bienetre-grid { grid-template-columns: 1fr; }
+    .defi-weeks { grid-template-columns: 1fr 1fr; }
+    .defi-hero { padding: 40px 24px; }
+    .meditation-header { flex-direction: column; gap: 20px; }
+    .lettre-card { padding: 36px 28px; }
+    .be-highlight { flex-direction: column; }
+    .section-header { flex-direction: column; gap: 12px; }
+    .prog-nav { padding: 0 16px; }
+  }
+
+  @media (max-width: 480px) {
+    .defi-weeks { grid-template-columns: 1fr; }
+    .hero-pillars { flex-direction: column; align-items: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo" style="display:flex;align-items:center;gap:10px;">
+    <svg width="28" height="34" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M50 5 C50 5 18 32 18 65 C18 90 32 108 50 113 C68 108 82 90 82 65 C82 32 50 5 50 5Z" fill="rgba(122,158,126,0.12)"/>
+      <path d="M50 5 C50 5 18 32 18 65 C18 90 32 108 50 113 C68 108 82 90 82 65 C82 32 50 5 50 5Z" stroke="#7a9e7e" stroke-width="1.2" fill="none"/>
+      <line x1="50" y1="10" x2="50" y2="106" stroke="#c9a96e" stroke-width="0.8" opacity="0.6"/>
+      <line x1="50" y1="38" x2="30" y2="48" stroke="#7a9e7e" stroke-width="0.6" opacity="0.4"/>
+      <line x1="50" y1="52" x2="26" y2="60" stroke="#7a9e7e" stroke-width="0.6" opacity="0.4"/>
+      <line x1="50" y1="66" x2="25" y2="73" stroke="#7a9e7e" stroke-width="0.6" opacity="0.4"/>
+      <line x1="50" y1="38" x2="70" y2="48" stroke="#7a9e7e" stroke-width="0.6" opacity="0.4"/>
+      <line x1="50" y1="52" x2="74" y2="60" stroke="#7a9e7e" stroke-width="0.6" opacity="0.4"/>
+      <line x1="50" y1="66" x2="75" y2="73" stroke="#7a9e7e" stroke-width="0.6" opacity="0.4"/>
+      <path d="M38 88 L50 55 L62 88" stroke="#4a7050" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <line x1="41" y1="78" x2="59" y2="78" stroke="#4a7050" stroke-width="1.8" stroke-linecap="round"/>
+      <path d="M38 65 L50 94 L62 65" stroke="#c9a96e" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.88"/>
+    </svg>
+    <span style="color:#d4a84b;font-family:'Cormorant Garamond',serif;font-weight:300;">Alpha</span> <em style="color:#7a9e7e;font-family:'Cormorant Garamond',serif;font-weight:300;">Vita</em>
+  </div>
+  <div class="nav-month">Mois 1 · Avril 2026</div>
+  <a href="alpha-vita.html" class="nav-back">← Accueil</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-number">01</div>
+  <div class="hero-wave"></div>
+
+  <div class="hero-badge">✦ Programme mensuel · Mois 1 · Gratuit</div>
+  <p class="hero-eyebrow">Avril 2026</p>
+
+  <h1 class="hero-title">Trouver le calme<br>au milieu de la <em>tempête</em></h1>
+  <p class="hero-subtitle">La Paix Intérieure</p>
+
+  <p class="hero-intro">
+    Ce mois-ci, nous posons ensemble les premières pierres. Pas pour effacer la douleur ou la peur — mais pour apprendre à coexister avec elles. À trouver, même dans les moments les plus durs, un espace de douceur qui n'appartient qu'à vous.
+  </p>
+
+  <div class="hero-pillars">
+    <div class="hero-pillar">🧘 Méditation guidée</div>
+    <div class="hero-pillar">💬 Témoignage</div>
+    <div class="hero-pillar">🌿 Bien-être</div>
+    <div class="hero-pillar">🌸 Défi du mois</div>
+  </div>
+</section>
+
+<!-- NAV PROGRAMME -->
+<div class="prog-nav">
+  <a href="#meditation" class="active">🧘 Méditation</a>
+  <a href="#temoignage">💬 Témoignage</a>
+  <a href="#bienetre">🌿 Bien-être</a>
+  <a href="#defi">🌸 Défi</a>
+  <a href="#lettre">✉️ La lettre</a>
+</div>
+
+<!-- ── 1. MÉDITATION ── -->
+<section id="meditation">
+  <div class="meditation-inner">
+    <div class="section-header reveal">
+      <div class="section-number">01</div>
+      <div class="section-info">
+        <span class="section-tag tag-meditation">Méditation guidée</span>
+        <h2 class="section-title">L'ancre intérieure —<br>respirer pour <em>revenir</em></h2>
+        <p class="section-subtitle">Une pratique de 10 à 15 minutes · Chaque matin, ou quand vous en avez besoin</p>
+      </div>
+    </div>
+
+    <div class="meditation-card reveal">
+      <div class="meditation-header">
+        <div class="meditation-icon-wrap">🫁</div>
+        <div>
+          <h3>Méditation de l'ancre</h3>
+          <p>Une pratique douce de respiration et de visualisation pour trouver un espace de calme — même quand tout semble chaotique autour de vous.</p>
+          <div class="meditation-duration">⏱ 12 minutes · Débutant·e bienvenu·e · Allongé·e ou assis·e</div>
+        </div>
+      </div>
+
+      <div class="meditation-body">
+        <div class="meditation-steps">
+          <div class="med-step">
+            <div class="med-step-num">1</div>
+            <div class="med-step-content">
+              <div class="med-step-title">Installez-vous · 2 min</div>
+              <div class="med-step-text">Trouvez une position confortable — allongé·e sur votre lit, assis·e dans un fauteuil. Posez vos mains sur votre ventre, paumes vers le haut. Fermez doucement les yeux. Il n'y a rien à faire maintenant, nulle part où aller. Vous êtes là, et c'est suffisant.</div>
+            </div>
+          </div>
+
+          <div class="med-step">
+            <div class="med-step-num">2</div>
+            <div class="med-step-content">
+              <div class="med-step-title">La respiration de l'ancre · 4 min</div>
+              <div class="med-step-text">Inspirez lentement par le nez sur 4 temps — sentez votre ventre se soulever. Retenez doucement 2 temps. Expirez par la bouche sur 6 temps, comme si vous souffliez sur une bougie sans l'éteindre. Répétez. À chaque expiration, imaginez que vous relâchez un peu du poids que vous portez.</div>
+            </div>
+          </div>
+
+          <div class="med-step">
+            <div class="med-step-num">3</div>
+            <div class="med-step-content">
+              <div class="med-step-title">La visualisation · 4 min</div>
+              <div class="med-step-text">Imaginez un endroit où vous vous sentiez en sécurité — un jardin, une plage, une pièce de votre enfance. Laissez tous les détails apparaître : les couleurs, les sons, les odeurs. Vous êtes en sécurité ici. La tempête existe, mais elle est dehors. Et vous êtes à l'intérieur, au chaud.</div>
+            </div>
+          </div>
+
+          <div class="med-step">
+            <div class="med-step-num">4</div>
+            <div class="med-step-content">
+              <div class="med-step-title">Le retour · 2 min</div>
+              <div class="med-step-text">Revenez doucement. Sentez le poids de votre corps. Bougez les doigts, les orteils. Ouvrez les yeux quand vous êtes prêt·e. Posez une main sur votre cœur. Dites-vous, en silence ou à voix haute : <em>"Je suis là. Je me bats. Je mérite la paix."</em></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="meditation-audio">
+          <!-- Lecteur audio réel — fichier meditation-ancre.mp3 à uploader sur GitHub -->
+          <audio id="audioPlayer" src="meditation-ancre_-_26_03_2026_14_29.m4a" preload="metadata"></audio>
+          <button class="audio-play" id="playBtn" onclick="toggleAudio()">▶</button>
+          <div class="audio-info">
+            <div class="audio-title">Méditation de l'ancre — Version guidée</div>
+            <div class="audio-sub">Narration douce · 12 min · Musique de fond apaisante</div>
+          </div>
+          <div class="audio-bar" onclick="seekAudio(event)" style="cursor:pointer;">
+            <div class="audio-progress" id="audioProgress"></div>
+          </div>
+          </div>
+          <div style="font-size:0.72rem;color:var(--stone);white-space:nowrap;">12:00</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:var(--sage-pale);border-radius:20px;padding:28px 32px;" class="reveal">
+      <p style="font-size:0.85rem;font-weight:300;color:var(--mid);line-height:1.8;">
+        💡 <strong style="color:var(--sage-deep);font-weight:400;">Conseil :</strong> Vous n'avez pas besoin de "réussir" cette méditation. Si votre esprit s'échappe — c'est normal, c'est humain. Ramenez-le doucement, sans jugement, comme vous ramèneriez un enfant qui s'est éloigné.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ── 2. TÉMOIGNAGE ── -->
+<section id="temoignage">
+  <div class="temoignage-inner">
+    <div class="section-header reveal">
+      <div class="section-number">02</div>
+      <div class="section-info">
+        <span class="section-tag tag-temoignage">Témoignage du mois</span>
+        <h2 class="section-title">Sophie, 44 ans —<br>le jour où j'ai <em>lâché prise</em></h2>
+        <p class="section-subtitle">Cancer du sein · 2 ans de rémission · Mère de deux enfants</p>
+      </div>
+    </div>
+
+    <div class="temo-layout">
+      <div class="temo-story reveal">
+        <div class="temo-story-text">
+          Je me souviens du jour du diagnostic comme si c'était hier. Le médecin parlait, et je n'entendais plus rien. Juste ce mot qui tournait en boucle dans ma tête. <strong>Cancer.</strong>
+          <br><br>
+          Les premières semaines, j'ai essayé de tout contrôler. Les rendez-vous, les traitements, les réactions des autres. Je voulais être forte, être courageuse, ne pas montrer que j'avais peur. Et puis un soir, seule dans ma salle de bain, j'ai craqué. J'ai pleuré pendant une heure. Et c'est dans ces larmes que j'ai trouvé quelque chose d'inattendu : <strong>un soulagement.</strong>
+          <br><br>
+          Je ne pouvais pas contrôler la maladie. Mais je pouvais contrôler comment je vivais chaque journée. Alors j'ai commencé à chercher, dans chaque heure, <strong>un moment de paix</strong>. Une tasse de thé le matin. Le soleil sur mon visage. La voix de mes enfants.
+          <br><br>
+          Aujourd'hui, deux ans après ma rémission, ces petits moments sont devenus ma vie entière. La tempête m'a changée. Pas brisée — changée.
+        </div>
+
+        <div class="temo-author-block">
+          <div class="temo-avatar">🌸</div>
+          <div>
+            <div class="temo-author-name">Sophie M.</div>
+            <div class="temo-author-info">44 ans · Île-de-France · Cancer du sein · En rémission depuis 2 ans</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="temo-message reveal" style="grid-column: 1 / -1;">
+        <div class="temo-message-title">Un mot pour vous, qui lisez ceci</div>
+        <div class="temo-message-body">
+          <p>Ce que Sophie a vécu, des milliers de personnes le vivent. Et chacun le vit à sa façon, avec ses propres peurs, ses propres ressources, son propre rythme.</p>
+          <p>Il n'y a pas de bonne façon de traverser cette épreuve. Il n'y a que <em>votre</em> façon. Et elle est valide, quelle qu'elle soit.</p>
+          <p>Si vous voulez partager votre histoire sur le groupe Alpha Vita — même juste quelques mots — vous ne savez pas combien de personnes vous pourriez aider sans le savoir.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 3. BIEN-ÊTRE ── -->
+<section id="bienetre">
+  <div class="bienetre-inner">
+    <div class="section-header reveal">
+      <div class="section-number">03</div>
+      <div class="section-info">
+        <span class="section-tag tag-bienetre">Conseils bien-être</span>
+        <h2 class="section-title">Nourrir et reposer<br>le corps qui <em>se bat</em></h2>
+        <p class="section-subtitle">Nutrition · Sommeil · Énergie · Adaptés aux contraintes des traitements</p>
+      </div>
+    </div>
+
+    <div class="bienetre-grid">
+      <div class="be-card reveal">
+        <div class="be-card-icon">🍵</div>
+        <div class="be-card-title">Nutrition en douceur</div>
+        <div class="be-card-intro">Pendant les traitements, l'appétit peut être capricieux. L'objectif n'est pas de "bien manger parfaitement" — mais de nourrir votre corps avec douceur et bienveillance.</div>
+        <div class="be-tips">
+          <div class="be-tip"><div class="be-tip-dot"></div>Privilégiez les petites portions fréquentes plutôt que trois grands repas</div>
+          <div class="be-tip"><div class="be-tip-dot"></div>Les aliments froids sont souvent mieux tolérés en cas de nausées</div>
+          <div class="be-tip"><div class="be-tip-dot"></div>Le gingembre (en infusion) peut aider à calmer les nausées</div>
+          <div class="be-tip"><div class="be-tip-dot"></div>Hydratez-vous régulièrement — même par petites gorgées</div>
+        </div>
+      </div>
+
+      <div class="be-card reveal">
+        <div class="be-card-icon">🌙</div>
+        <div class="be-card-title">Le sommeil réparateur</div>
+        <div class="be-card-intro">La fatigue des traitements est réelle et profonde. Le sommeil n'est pas un luxe — c'est une thérapie en soi. Voici comment l'accueillir mieux.</div>
+        <div class="be-tips">
+          <div class="be-tip"><div class="be-tip-dot"></div>Créez un rituel du coucher : même heure, lumière tamisée, pas d'écran</div>
+          <div class="be-tip"><div class="be-tip-dot"></div>La lavande en huile essentielle sur l'oreiller peut favoriser la détente</div>
+          <div class="be-tip"><div class="be-tip-dot"></div>Une tisane de camomille ou de tilleul 30 min avant de dormir</div>
+          <div class="be-tip"><div class="be-tip-dot"></div>Autorisez-vous les siestes — elles ne sont pas une faiblesse</div>
+        </div>
+      </div>
+
+      <div class="be-highlight reveal">
+        <div class="be-highlight-icon">⚡</div>
+        <div class="be-highlight-text">
+          <div class="be-highlight-title">La règle des 5 minutes</div>
+          <div class="be-highlight-body">Les jours où vous n'avez aucune énergie, donnez-vous juste 5 minutes dehors. Pas pour marcher — juste pour sentir l'air sur votre peau. La lumière naturelle, même quelques minutes, régule les rythmes biologiques et peut améliorer doucement l'humeur. Et si vous ne pouvez pas sortir, ouvrez une fenêtre. Ce n'est pas rien — c'est déjà beaucoup.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:24px;background:white;border-radius:20px;padding:28px 32px;border:1px solid rgba(201,169,110,0.15);" class="reveal">
+      <p style="font-size:0.78rem;font-weight:300;color:var(--stone);line-height:1.8;">
+        ⚠️ <strong style="color:var(--mid);font-weight:400;">Important :</strong> Ces conseils sont des pistes de bien-être général. Consultez toujours votre équipe médicale avant de modifier votre alimentation ou d'ajouter des compléments pendant le traitement. Chaque situation est unique.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ── 4. DÉFI ── -->
+<section id="defi">
+  <div class="defi-inner">
+    <div class="section-header reveal">
+      <div class="section-number">04</div>
+      <div class="section-info">
+        <span class="section-tag tag-defi">Défi du mois</span>
+        <h2 class="section-title">Le journal<br>des <em>petites lumières</em></h2>
+        <p class="section-subtitle">Un rituel doux · À votre rythme · Seul·e ou partagé sur le groupe</p>
+      </div>
+    </div>
+
+    <div class="defi-hero reveal">
+      <div class="defi-hero-badge">✦ Défi Avril 2026</div>
+      <h3 class="defi-hero-title">Chaque jour, noter<br>une <em>petite lumière</em></h3>
+      <p class="defi-hero-desc">
+        Pas un exploit. Pas une victoire médicale. Juste une chose — même minuscule — qui a apporté un moment de douceur dans votre journée. Une odeur. Un sourire. Un rayon de soleil. Le goût d'un café. La voix de quelqu'un qu'on aime. Ces lumières existent même dans les jours les plus sombres.
+      </p>
+    </div>
+
+    <div class="defi-weeks">
+      <div class="week-card reveal">
+        <div class="week-number">Semaine 1</div>
+        <div class="week-icon">🌅</div>
+        <div class="week-title">Le matin — noter au réveil</div>
+        <div class="week-desc">Avant même de regarder votre téléphone, posez une chose belle que vous anticipez pour aujourd'hui, ou une chose belle d'hier.</div>
+        <div class="week-check">
+          <div class="checkbox" onclick="this.classList.toggle('done');this.textContent=this.classList.contains('done')?'✓':''"></div>
+          J'ai commencé
+        </div>
+      </div>
+
+      <div class="week-card reveal">
+        <div class="week-number">Semaine 2</div>
+        <div class="week-icon">🌸</div>
+        <div class="week-title">Les sens — noter ce qu'on ressent</div>
+        <div class="week-desc">Cette semaine, votre lumière doit être liée à l'un de vos sens : quelque chose de beau que vous avez vu, entendu, senti ou touché.</div>
+        <div class="week-check">
+          <div class="checkbox" onclick="this.classList.toggle('done');this.textContent=this.classList.contains('done')?'✓':''"></div>
+          J'ai commencé
+        </div>
+      </div>
+
+      <div class="week-card reveal">
+        <div class="week-number">Semaine 3</div>
+        <div class="week-icon">💛</div>
+        <div class="week-title">Les liens — noter quelqu'un</div>
+        <div class="week-desc">Cette semaine, la lumière vient d'une personne. Un geste, un mot, un sourire, une présence. Qui vous a touché·e, même légèrement ?</div>
+        <div class="week-check">
+          <div class="checkbox" onclick="this.classList.toggle('done');this.textContent=this.classList.contains('done')?'✓':''"></div>
+          J'ai commencé
+        </div>
+      </div>
+
+      <div class="week-card reveal">
+        <div class="week-number">Semaine 4</div>
+        <div class="week-icon">🌟</div>
+        <div class="week-title">Vous — noter votre force</div>
+        <div class="week-desc">La lumière, c'est vous. Quelque chose que vous avez traversé, surmonté, accepté ou fait cette semaine. Même la plus petite chose compte.</div>
+        <div class="week-check">
+          <div class="checkbox" onclick="this.classList.toggle('done');this.textContent=this.classList.contains('done')?'✓':''"></div>
+          J'ai commencé
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:24px;background:white;border-radius:20px;padding:28px 32px;border:1px solid rgba(90,80,120,0.1);display:flex;align-items:center;gap:20px;" class="reveal">
+      <div style="font-size:1.8rem;">💚</div>
+      <p style="font-size:0.85rem;font-weight:300;color:var(--mid);line-height:1.75;">
+        Partagez vos lumières sur le groupe WhatsApp Alpha Vita. Ce que vous trouvez petit peut être exactement ce dont quelqu'un d'autre avait besoin de lire aujourd'hui.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ── LETTRE ── -->
+<section id="lettre">
+  <div class="lettre-inner">
+    <div class="section-header reveal" style="justify-content:center;text-align:center;flex-direction:column;align-items:center;gap:12px;">
+      <span class="section-tag tag-temoignage" style="margin-bottom:0;">La lettre du mois</span>
+      <h2 class="section-title" style="text-align:center;">Un mot <em>du cœur</em></h2>
+    </div>
+
+    <div class="lettre-card reveal">
+      <div class="lettre-from">De l'équipe Alpha Vita · Géraldine Esther · Avril 2026</div>
+      <div class="lettre-title">À vous qui traversez cette tempête,</div>
+      <div class="lettre-body">
+        <p>Vous avez ouvert ce programme. C'est déjà un acte de courage.</p>
+        <p>Peut-être que vous allez bien aujourd'hui. Peut-être que vous avez du mal à vous lever. Peut-être que vous êtes entre les deux — et que vous ne savez plus très bien comment vous allez. Tout ça est juste. Tout ça est humain.</p>
+        <p><strong>Ce programme ne va pas guérir quoi que ce soit.</strong> Je ne le prétends pas. Mais je crois profondément que prendre soin de votre esprit et de votre âme, en même temps que votre corps est soigné, fait une différence. Pas sur les chiffres de votre bilan sanguin — sur la qualité de chaque journée que vous vivez.</p>
+        <p>Ce mois-ci, je vous invite à une seule chose : <strong>chercher la paix</strong>. Pas à tout prix. Pas en niant ce que vous traversez. Mais en apprenant à coexister avec la douleur et la peur, tout en laissant de la place pour la douceur.</p>
+        <p>Elle est là. Parfois très petite, parfois cachée. Mais elle est là.</p>
+        <p>Je suis là aussi.</p>
+      </div>
+      <div class="lettre-signature">
+        <div class="lettre-sig-name">L'équipe Alpha Vita — Géraldine Esther</div>
+        <div class="lettre-sig-sub">Corps · Esprit · Âme · Avec tout mon cœur</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="prog-footer">
+  <div class="prog-footer-logo">Alpha <em>Vita</em></div>
+  <div class="prog-footer-nav">
+    <a href="#meditation">Méditation</a>
+    <a href="#temoignage">Témoignage</a>
+    <a href="#bienetre">Bien-être</a>
+    <a href="#defi">Défi</a>
+    <a href="#lettre">La lettre</a>
+  </div>
+  <p>Alpha Vita est un programme de soutien complémentaire. Il ne constitue pas un avis médical, ne remplace aucun traitement et ne prétend à aucun effet thérapeutique certifié. Consultez toujours votre équipe médicale.</p>
+  <p style="margin-top:24px;font-size:0.62rem;color:rgba(250,248,245,0.2);">© 2026 Alpha Vita · Mois 1 · Fait avec amour</p>
+</div>
+
+<script>
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 60);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Active nav on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.prog-nav a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 150) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  });
+
+  // ── LECTEUR AUDIO ──
+  const audio = document.getElementById('audioPlayer');
+  const playBtn = document.getElementById('playBtn');
+  const progress = document.getElementById('audioProgress');
+
+  function toggleAudio() {
+    if (!audio) return;
+    if (audio.paused) {
+      audio.play();
+      playBtn.textContent = '⏸';
+    } else {
+      audio.pause();
+      playBtn.textContent = '▶';
+    }
+  }
+
+  function seekAudio(e) {
+    if (!audio || !audio.duration) return;
+    const bar = e.currentTarget;
+    const ratio = e.offsetX / bar.offsetWidth;
+    audio.currentTime = ratio * audio.duration;
+  }
+
+  if (audio) {
+    audio.addEventListener('timeupdate', () => {
+      if (audio.duration) {
+        const pct = (audio.currentTime / audio.duration) * 100;
+        progress.style.width = pct + '%';
+      }
+    });
+    audio.addEventListener('ended', () => {
+      playBtn.textContent = '▶';
+      progress.style.width = '0%';
+    });
+    audio.addEventListener('error', () => {
+      playBtn.textContent = '▶';
+      playBtn.title = 'Fichier audio non disponible — uploadez meditation-ancre.mp3 sur GitHub';
+    });
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alpha Vita — Soutenir le projet</title>
+<script src="https://js.stripe.com/v3/"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sage: #7a9e7e; --sage-light: #a8c5ac; --sage-pale: #e8f0e9; --sage-deep: #4a7050;
+    --gold: #c9a96e; --gold-light: #e8d5b0; --gold-pale: #f5ede0;
+    --stone: #8c8680; --cream: #faf8f5; --warm-white: #f5f2ed; --dark: #2c2a27; --mid: #5a5654;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--dark); overflow-x: hidden; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 20px 48px; display: flex; align-items: center; justify-content: space-between; background: rgba(250,248,245,0.95); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(122,158,126,0.12); }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 300; }
+  .nav-logo em { color: var(--sage); font-style: italic; }
+  .nav-back { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--stone); text-decoration: none; transition: color 0.3s; }
+  .nav-back:hover { color: var(--sage); }
+
+  /* ── HERO ── */
+  #hero { min-height: 80vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 120px 24px 60px; position: relative; overflow: hidden; background: linear-gradient(160deg, #f0f5f0 0%, var(--cream) 50%, #f5f0eb 100%); }
+  .hero-orb { position: absolute; border-radius: 50%; pointer-events: none; }
+  .hero-orb:nth-child(1) { width: 480px; height: 480px; background: radial-gradient(circle, rgba(122,158,126,0.1) 0%, transparent 70%); top: -80px; right: -100px; animation: breathe 8s ease-in-out infinite; }
+  .hero-orb:nth-child(2) { width: 360px; height: 360px; background: radial-gradient(circle, rgba(201,169,110,0.08) 0%, transparent 70%); bottom: -60px; left: -80px; animation: breathe 8s ease-in-out infinite; animation-delay: -4s; }
+  .hero-badge { display: inline-block; font-size: 0.62rem; font-weight: 400; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); border: 1px solid var(--gold-light); padding: 7px 22px; border-radius: 30px; margin-bottom: 36px; background: rgba(255,255,255,0.7); animation: fadeUp 1s 0.3s both; }
+  .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.8rem, 6vw, 5.2rem); font-weight: 300; line-height: 1.1; color: var(--dark); margin-bottom: 12px; animation: fadeUp 1s 0.5s both; }
+  .hero-title em { color: var(--sage); font-style: italic; }
+  .hero-sub { font-family: 'Cormorant Garamond', serif; font-size: clamp(1rem, 2vw, 1.35rem); font-weight: 300; font-style: italic; color: var(--gold); margin-bottom: 32px; animation: fadeUp 1s 0.7s both; }
+  .hero-desc { max-width: 580px; font-size: 0.95rem; font-weight: 300; line-height: 1.85; color: var(--mid); animation: fadeUp 1s 0.9s both; }
+
+  /* ── USAGES ── */
+  #usages { padding: 100px 24px; background: var(--cream); }
+  .usages-inner { max-width: 1000px; margin: 0 auto; }
+  .section-label { font-size: 0.62rem; font-weight: 400; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; display: block; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 300; line-height: 1.2; color: var(--dark); margin-bottom: 20px; }
+  .section-title em { color: var(--sage); font-style: italic; }
+  .section-body { font-size: 0.92rem; font-weight: 300; line-height: 1.85; color: var(--mid); max-width: 580px; margin-bottom: 56px; }
+
+  .usages-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .usage-card { background: white; border-radius: 24px; padding: 32px 28px; border: 1px solid rgba(122,158,126,0.1); transition: transform 0.3s, box-shadow 0.3s; position: relative; overflow: hidden; }
+  .usage-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--sage-light), var(--gold-light)); }
+  .usage-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(122,158,126,0.12); }
+  .usage-icon { font-size: 2.2rem; margin-bottom: 18px; }
+  .usage-title { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 400; color: var(--dark); margin-bottom: 10px; line-height: 1.3; }
+  .usage-desc { font-size: 0.83rem; font-weight: 300; color: var(--mid); line-height: 1.75; }
+  .usage-examples { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+  .usage-tag { font-size: 0.58rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sage); background: var(--sage-pale); padding: 4px 10px; border-radius: 20px; }
+
+  /* ── FORMULAIRE ── */
+  #don { padding: 100px 24px; background: var(--warm-white); }
+  .don-inner { max-width: 640px; margin: 0 auto; }
+  .don-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 300; color: var(--dark); margin-bottom: 12px; text-align: center; }
+  .don-title em { color: var(--sage); font-style: italic; }
+  .don-subtitle { font-size: 0.88rem; font-weight: 300; color: var(--mid); line-height: 1.75; text-align: center; margin-bottom: 40px; }
+  .don-form { background: white; border-radius: 28px; padding: 48px; border: 1px solid rgba(122,158,126,0.1); box-shadow: 0 4px 40px rgba(0,0,0,0.04); }
+  .form-step-label { font-size: 0.62rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sage); margin-bottom: 16px; display: block; }
+
+  /* Montants */
+  .amounts-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 24px; }
+  .amount-btn { padding: 20px 16px; border-radius: 16px; border: 1.5px solid rgba(122,158,126,0.2); background: white; cursor: pointer; text-align: left; transition: all 0.25s; display: flex; align-items: center; gap: 16px; }
+  .amount-btn:hover, .amount-btn.selected { border-color: var(--sage); background: var(--sage-pale); box-shadow: 0 0 0 3px rgba(122,158,126,0.1); }
+  .amount-left { flex-shrink: 0; }
+  .amount-num { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; color: var(--sage); line-height: 1; display: block; }
+  .amount-right {}
+  .amount-title { font-size: 0.82rem; font-weight: 400; color: var(--dark); margin-bottom: 3px; }
+  .amount-desc { font-size: 0.72rem; font-weight: 300; color: var(--stone); line-height: 1.5; }
+
+  .amount-btn-libre { grid-column: 1 / -1; padding: 16px 20px; border-radius: 16px; border: 1.5px solid rgba(122,158,126,0.2); background: white; cursor: pointer; display: flex; align-items: center; justify-content: space-between; transition: all 0.25s; }
+  .amount-btn-libre:hover, .amount-btn-libre.selected { border-color: var(--sage); background: var(--sage-pale); box-shadow: 0 0 0 3px rgba(122,158,126,0.1); }
+  .libre-left { display: flex; align-items: center; gap: 12px; }
+  .libre-icon { font-size: 1.4rem; }
+  .libre-title { font-size: 0.85rem; font-weight: 400; color: var(--dark); }
+  .libre-desc { font-size: 0.72rem; font-weight: 300; color: var(--stone); }
+  .libre-arrow { font-size: 1rem; color: var(--sage-light); }
+
+  .custom-amount-wrap { position: relative; margin-top: 12px; margin-bottom: 8px; }
+  .custom-amount-wrap label { font-size: 0.7rem; font-weight: 300; color: var(--stone); margin-bottom: 8px; display: block; }
+  .custom-amount-input { width: 100%; padding: 14px 48px 14px 20px; border: 1.5px solid rgba(122,158,126,0.2); border-radius: 14px; font-family: 'Jost', sans-serif; font-size: 1rem; font-weight: 300; color: var(--dark); background: white; outline: none; transition: border-color 0.3s; }
+  .custom-amount-input:focus { border-color: var(--sage); }
+  .input-suffix { position: absolute; right: 16px; top: 50%; transform: translateY(50%); font-size: 0.85rem; color: var(--stone); }
+
+  .form-divider { height: 1px; background: rgba(122,158,126,0.1); margin: 32px 0; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+  .form-row.full { grid-template-columns: 1fr; }
+  .form-field { display: flex; flex-direction: column; gap: 6px; }
+  .form-field label { font-size: 0.7rem; font-weight: 300; color: var(--stone); }
+  .form-field input { padding: 12px 16px; border: 1.5px solid rgba(122,158,126,0.2); border-radius: 12px; font-family: 'Jost', sans-serif; font-size: 0.88rem; font-weight: 300; color: var(--dark); background: white; outline: none; transition: border-color 0.3s; }
+  .form-field input:focus { border-color: var(--sage); }
+  .form-field input::placeholder { color: rgba(140,134,128,0.4); }
+
+  .stripe-wrap { border: 1.5px solid rgba(122,158,126,0.2); border-radius: 12px; padding: 14px 16px; margin-bottom: 24px; }
+
+  .anonymous-toggle { display: flex; align-items: center; gap: 12px; font-size: 0.8rem; font-weight: 300; color: var(--mid); cursor: pointer; margin-bottom: 28px; }
+  .toggle-box { width: 20px; height: 20px; flex-shrink: 0; border: 1.5px solid rgba(122,158,126,0.3); border-radius: 6px; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+  .toggle-box.checked { background: var(--sage); border-color: var(--sage); color: white; font-size: 0.65rem; }
+
+  .message-field { margin-bottom: 24px; }
+  .message-field label { font-size: 0.7rem; font-weight: 300; color: var(--stone); margin-bottom: 8px; display: block; }
+  .message-field textarea { width: 100%; padding: 12px 16px; border: 1.5px solid rgba(122,158,126,0.2); border-radius: 12px; font-family: 'Jost', sans-serif; font-size: 0.88rem; font-weight: 300; color: var(--dark); background: white; outline: none; resize: none; transition: border-color 0.3s; line-height: 1.6; }
+  .message-field textarea:focus { border-color: var(--sage); }
+  .message-field textarea::placeholder { color: rgba(140,134,128,0.4); }
+
+  .don-submit { width: 100%; padding: 18px 32px; background: var(--sage); color: white; border: none; border-radius: 40px; cursor: pointer; font-family: 'Jost', sans-serif; font-size: 0.78rem; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; transition: all 0.3s; box-shadow: 0 4px 20px rgba(122,158,126,0.3); display: flex; align-items: center; justify-content: center; gap: 10px; }
+  .don-submit:hover { background: var(--sage-deep); transform: translateY(-2px); }
+  .don-submit:disabled { background: var(--sage-light); transform: none; cursor: not-allowed; }
+  .don-security { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 16px; font-size: 0.7rem; font-weight: 300; color: var(--stone); }
+
+  /* ── MERCI ── */
+  #merci { display: none; padding: 80px 24px; text-align: center; }
+  #merci.visible { display: block; }
+  .merci-card { max-width: 560px; margin: 0 auto; background: white; border-radius: 28px; padding: 64px 48px; border: 1px solid rgba(122,158,126,0.1); box-shadow: 0 8px 40px rgba(122,158,126,0.08); }
+  .merci-icon { font-size: 4rem; margin-bottom: 24px; }
+  .merci-title { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 300; color: var(--dark); margin-bottom: 16px; }
+  .merci-title em { color: var(--sage); font-style: italic; }
+  .merci-body { font-size: 0.92rem; font-weight: 300; line-height: 1.85; color: var(--mid); }
+
+  footer { background: var(--dark); color: rgba(250,248,245,0.35); padding: 48px 24px; text-align: center; }
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 300; color: var(--cream); margin-bottom: 8px; }
+  .footer-logo em { color: var(--sage); font-style: italic; }
+  footer p { font-size: 0.72rem; font-weight: 300; line-height: 1.7; max-width: 540px; margin: 12px auto 0; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.04); } }
+  .reveal { opacity: 0; transform: translateY(36px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    .usages-grid { grid-template-columns: 1fr; }
+    .amounts-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .don-form { padding: 32px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Alpha <em>Vita</em></div>
+  <a href="index.html" class="nav-back">← Accueil</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-orb"></div>
+  <div class="hero-orb"></div>
+  <div class="hero-badge">✦ Soutenir Alpha Vita · 100% libre</div>
+  <h1 class="hero-title">Offrir <em>librement</em></h1>
+  <p class="hero-sub">Chaque don nourrit quelque chose de concret</p>
+  <p class="hero-desc">Alpha Vita sera toujours gratuit. Parce que personne ne devrait avoir à payer pour ne pas être seul dans l'épreuve. Si ce programme vous touche, votre soutien — même tout petit — permet de l'enrichir, d'aller encore plus loin pour ceux qui en ont besoin.</p>
+</section>
+
+<!-- USAGES -->
+<section id="usages">
+  <div class="usages-inner">
+    <div style="max-width:600px;margin-bottom:56px;">
+      <span class="section-label reveal">À quoi sert votre don</span>
+      <h2 class="section-title reveal">Concrètement, vos dons<br>permettent de <em>construire</em></h2>
+      <p class="section-body reveal">Aucun centime ne va dans une poche. Chaque euro est réinvesti directement dans la communauté — pour la rendre plus riche, plus humaine, plus présente.</p>
+    </div>
+
+    <div class="usages-grid">
+      <div class="usage-card reveal">
+        <div class="usage-icon">🎙️</div>
+        <div class="usage-title">Intervenants spécialisés</div>
+        <div class="usage-desc">Inviter des professionnels bienveillants pour la communauté — des experts qui parlent à des êtres humains, pas à des patients.</div>
+        <div class="usage-examples">
+          <span class="usage-tag">Psychologue en oncologie</span>
+          <span class="usage-tag">Nutritionniste</span>
+          <span class="usage-tag">Sophrologue</span>
+          <span class="usage-tag">Médecin en live</span>
+        </div>
+      </div>
+
+      <div class="usage-card reveal">
+        <div class="usage-icon">🎧</div>
+        <div class="usage-title">Méditations audio professionnelles</div>
+        <div class="usage-desc">Produire de vraies séances enregistrées en studio avec une voix professionnelle et de la musique apaisante.</div>
+        <div class="usage-examples">
+          <span class="usage-tag">Studio d'enregistrement</span>
+          <span class="usage-tag">Voix guidée</span>
+          <span class="usage-tag">Musique apaisante</span>
+        </div>
+      </div>
+
+      <div class="usage-card reveal">
+        <div class="usage-icon">📦</div>
+        <div class="usage-title">Colis de douceur</div>
+        <div class="usage-desc">Envoyer à des membres traversant des moments particulièrement difficiles un colis surprise — un geste concret, humain, inattendu.</div>
+        <div class="usage-examples">
+          <span class="usage-tag">Tisane & bougie</span>
+          <span class="usage-tag">Carnet & stylo</span>
+          <span class="usage-tag">Mot manuscrit</span>
+        </div>
+      </div>
+
+      <div class="usage-card reveal">
+        <div class="usage-icon">🖨️</div>
+        <div class="usage-title">Programme mensuel imprimé</div>
+        <div class="usage-desc">Pour les membres moins à l'aise avec le numérique — recevoir le programme du mois par courrier dans une belle version papier.</div>
+        <div class="usage-examples">
+          <span class="usage-tag">Impression qualité</span>
+          <span class="usage-tag">Envoi postal</span>
+          <span class="usage-tag">Format magazine</span>
+        </div>
+      </div>
+
+      <div class="usage-card reveal">
+        <div class="usage-icon">💻</div>
+        <div class="usage-title">Frais techniques</div>
+        <div class="usage-desc">Les coûts invisibles qui permettent à tout de fonctionner — pour que le programme soit toujours disponible, rapide et fiable.</div>
+        <div class="usage-examples">
+          <span class="usage-tag">Hébergement</span>
+          <span class="usage-tag">Nom de domaine</span>
+          <span class="usage-tag">Outils email</span>
+          <span class="usage-tag">Plateforme audio</span>
+        </div>
+      </div>
+
+      <div class="usage-card reveal" style="background:linear-gradient(135deg,var(--sage-pale),var(--gold-pale));border-color:rgba(122,158,126,0.2);">
+        <div class="usage-icon">🌱</div>
+        <div class="usage-title">Et demain…</div>
+        <div class="usage-desc">Chaque don supplémentaire ouvre de nouvelles possibilités — de nouveaux intervenants, de nouvelles ressources, de nouveaux moyens d'être là pour vous.</div>
+        <div class="usage-examples">
+          <span class="usage-tag">Votre soutien décide</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMULAIRE DON -->
+<section id="don">
+  <div class="don-inner">
+    <span class="section-label reveal" style="text-align:center;display:block;">Faire un don</span>
+    <h2 class="don-title reveal">Choisissez votre <em>geste</em></h2>
+    <p class="don-subtitle reveal">Aucun montant n'est trop petit. Chaque euro compte. Et si vous ne pouvez pas donner, votre présence dans la communauté est déjà un don.</p>
+
+    <div class="don-form reveal">
+
+      <span class="form-step-label">1 — Choisissez un montant</span>
+
+      <div class="amounts-grid">
+
+        <button class="amount-btn" onclick="selectAmount(this, 5)">
+          <div class="amount-left">
+            <span class="amount-num">5€</span>
+          </div>
+          <div class="amount-right">
+            <div class="amount-title">Une tisane pour un colis 📦</div>
+            <div class="amount-desc">Participe à l'envoi d'un colis de douceur à un membre dans l'épreuve</div>
+          </div>
+        </button>
+
+        <button class="amount-btn selected" onclick="selectAmount(this, 15)">
+          <div class="amount-left">
+            <span class="amount-num">15€</span>
+          </div>
+          <div class="amount-right">
+            <div class="amount-title">Un programme imprimé 🖨️</div>
+            <div class="amount-desc">Finance l'impression et l'envoi postal du programme mensuel pour un membre</div>
+          </div>
+        </button>
+
+        <button class="amount-btn" onclick="selectAmount(this, 30)">
+          <div class="amount-left">
+            <span class="amount-num">30€</span>
+          </div>
+          <div class="amount-right">
+            <div class="amount-title">Une séance audio 🎧</div>
+            <div class="amount-desc">Contribue à la production d'une méditation guidée enregistrée en studio</div>
+          </div>
+        </button>
+
+        <button class="amount-btn" onclick="selectAmount(this, 50)">
+          <div class="amount-left">
+            <span class="amount-num">50€</span>
+          </div>
+          <div class="amount-right">
+            <div class="amount-title">Un intervenant 🎙️</div>
+            <div class="amount-desc">Participe à l'invitation d'un professionnel (psychologue, sophrologue) pour la communauté</div>
+          </div>
+        </button>
+
+        <button class="amount-btn-libre" onclick="selectAmountLibre(this)">
+          <div class="libre-left">
+            <span class="libre-icon">🌿</span>
+            <div>
+              <div class="libre-title">Montant libre</div>
+              <div class="libre-desc">Choisissez vous-même votre geste</div>
+            </div>
+          </div>
+          <span class="libre-arrow">→</span>
+        </button>
+
+      </div>
+
+      <div class="custom-amount-wrap" id="customAmountWrap" style="display:none;">
+        <label>Votre montant personnalisé</label>
+        <div style="position:relative;">
+          <input type="number" class="custom-amount-input" id="customAmountInput" placeholder="Entrez un montant" min="1"/>
+          <span class="input-suffix">€</span>
+        </div>
+      </div>
+
+      <div class="form-divider"></div>
+
+      <span class="form-step-label">2 — Vos informations</span>
+      <div class="form-row">
+        <div class="form-field"><label>Prénom</label><input type="text" placeholder="Marie"/></div>
+        <div class="form-field"><label>Nom</label><input type="text" placeholder="Dupont"/></div>
+      </div>
+      <div class="form-row full">
+        <div class="form-field"><label>Email (pour votre reçu)</label><input type="email" placeholder="marie@email.com"/></div>
+      </div>
+      <div class="anonymous-toggle" onclick="toggleAnonymous()">
+        <div class="toggle-box" id="anonBox"></div>
+        Je souhaite faire ce don de façon anonyme
+      </div>
+
+      <div class="form-divider"></div>
+
+      <span class="form-step-label">3 — Paiement sécurisé</span>
+      <div class="stripe-wrap">
+        <div style="font-size:0.82rem;font-weight:300;color:var(--stone);padding:4px 0;">🔒 Vos coordonnées bancaires seront saisies ici via Stripe (chiffrement SSL)</div>
+      </div>
+
+      <div class="message-field">
+        <label>Un mot pour la communauté (optionnel)</label>
+        <textarea rows="3" placeholder="Je vous soutiens de tout cœur..."></textarea>
+      </div>
+
+      <button class="don-submit" id="submitBtn" onclick="handleDon()">
+        <span>🌿</span><span id="submitText">Faire un don de 15€</span>
+      </button>
+      <div class="don-security">🔒 Paiement 100% sécurisé par Stripe · Aucune donnée bancaire stockée</div>
+    </div>
+  </div>
+</section>
+
+<!-- MERCI -->
+<section id="merci">
+  <div class="merci-card">
+    <div class="merci-icon">🌸</div>
+    <h2 class="merci-title">Merci du fond du <em>cœur</em></h2>
+    <p class="merci-body">Votre don a bien été reçu. Un email de confirmation va vous être envoyé.<br><br>Grâce à vous, Alpha Vita peut continuer à grandir — nouvelles méditations, nouveaux intervenants, nouveaux colis de douceur pour ceux qui en ont besoin.<br><br><strong style="color:var(--sage);">Merci. Sincèrement.</strong></p>
+    <a href="index.html" style="display:inline-block;margin-top:32px;font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--sage);text-decoration:none;border-bottom:1px solid var(--sage-light);padding-bottom:2px;">← Retour à l'accueil</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Alpha <em>Vita</em></div>
+  <p>Corps · Esprit · Âme</p>
+  <p style="margin-top:16px;">Alpha Vita est une structure officielle. Les dons collectés sont exclusivement destinés à financer les activités de la communauté. Aucun bénéfice personnel n'est réalisé.</p>
+  <p style="margin-top:16px;font-size:0.62rem;color:rgba(250,248,245,0.15);">© 2026 Alpha Vita · Paiements sécurisés par Stripe</p>
+</footer>
+
+<script>
+  document.querySelectorAll('.reveal').forEach(el => {
+    new IntersectionObserver((entries, obs) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 80); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.08 }).observe(el);
+  });
+
+  let selectedAmount = 15;
+
+  function selectAmount(btn, amount) {
+    document.querySelectorAll('.amount-btn, .amount-btn-libre').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    document.getElementById('customAmountWrap').style.display = 'none';
+    selectedAmount = amount;
+    document.getElementById('submitText').textContent = `Faire un don de ${amount}€`;
+  }
+
+  function selectAmountLibre(btn) {
+    document.querySelectorAll('.amount-btn, .amount-btn-libre').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    document.getElementById('customAmountWrap').style.display = 'block';
+    selectedAmount = null;
+    document.getElementById('submitText').textContent = 'Faire un don';
+  }
+
+  document.getElementById('customAmountInput')?.addEventListener('input', e => {
+    const v = parseInt(e.target.value);
+    if (v > 0) { selectedAmount = v; document.getElementById('submitText').textContent = `Faire un don de ${v}€`; }
+  });
+
+  function toggleAnonymous() {
+    const box = document.getElementById('anonBox');
+    box.classList.toggle('checked');
+    box.textContent = box.classList.contains('checked') ? '✓' : '';
+  }
+
+  function handleDon() {
+    if (!selectedAmount || selectedAmount <= 0) { alert('Veuillez choisir ou saisir un montant.'); return; }
+
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    document.getElementById('submitText').textContent = '💛 Redirection vers le paiement…';
+
+    // ── STRIPE ──────────────────────────────────────────
+    // Remplacez la ligne ci-dessous par votre vraie clé :
+    // pk_live_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+    const STRIPE_KEY = 'pk_live_51RKRzX4IesA7oYOstceBCNwLTTqlshVA7Wz8ayUkugMBeHcsYC0mMxtm4O67asSrkWZv3xqn7IGgt4a1e2orqdJt00lc1HjwfW';
+    // ────────────────────────────────────────────────────
+
+    if (STRIPE_KEY.includes('METTEZ_VOTRE_CLE')) {
+      // Mode démo — Stripe pas encore configuré
+      setTimeout(() => {
+        document.getElementById('don').style.display = 'none';
+        const merci = document.getElementById('merci');
+        merci.classList.add('visible');
+        merci.scrollIntoView({ behavior: 'smooth' });
+      }, 1800);
+      return;
+    }
+
+    // Vrai paiement Stripe
+    const stripe = Stripe(STRIPE_KEY);
+    stripe.redirectToCheckout({
+      lineItems: [{ price_data: {
+        currency: 'eur',
+        product_data: { name: 'Don Alpha Vita' },
+        unit_amount: selectedAmount * 100
+      }, quantity: 1 }],
+      mode: 'payment',
+      successUrl: window.location.origin + '/dons.html?merci=1',
+      cancelUrl: window.location.href
+    }).then(result => {
+      if (result.error) {
+        btn.disabled = false;
+        document.getElementById('submitText').textContent = `Faire un don de ${selectedAmount}€`;
+        alert(result.error.message);
+      }
+    });
+  }
+
+  // Afficher le message de remerciement si retour Stripe
+  if (window.location.search.includes('merci=1')) {
+    document.getElementById('don').style.display = 'none';
+    const merci = document.getElementById('merci');
+    merci.classList.add('visible');
+    merci.scrollIntoView({ behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
