@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alpha Vita — Mois 4 · La Respiration comme Médicament</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sage:#7a9e7e;--sage-light:#a8c5ac;--sage-pale:#e8f0e9;--sage-deep:#4a7050;
+    --gold:#c9a96e;--gold-light:#e8d5b0;--gold-pale:#f5ede0;
+    --blue:#6e9ec4;--blue-light:#a0c4e0;--blue-pale:#e8f0f5;--blue-deep:#3a6890;
+    --rose-pale:#f5eaea;--rose-deep:#8a5858;
+    --stone:#8c8680;--cream:#faf8f5;--warm-white:#f5f2ed;--dark:#2c2a27;--mid:#5a5654;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--dark);overflow-x:hidden;}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 48px;display:flex;align-items:center;justify-content:space-between;background:rgba(250,248,245,0.93);backdrop-filter:blur(14px);border-bottom:1px solid rgba(110,158,196,0.12);}
+  .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:300;display:flex;align-items:center;gap:8px;}
+  .nav-month{font-size:0.65rem;font-weight:300;letter-spacing:0.18em;text-transform:uppercase;color:var(--stone);}
+  .nav-back{font-size:0.65rem;font-weight:300;letter-spacing:0.15em;text-transform:uppercase;color:var(--stone);text-decoration:none;transition:color 0.3s;}
+  .nav-back:hover{color:var(--sage);}
+
+  /* HERO */
+  #hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 24px 80px;position:relative;overflow:hidden;
+    background:radial-gradient(ellipse at 30% 20%,rgba(110,158,196,0.18) 0%,transparent 50%),
+               radial-gradient(ellipse at 70% 80%,rgba(122,158,126,0.12) 0%,transparent 50%),
+               linear-gradient(160deg,#0f1a25 0%,#152535 40%,#1a2b1b 100%);}
+  .hero-wave{position:absolute;bottom:0;left:0;right:0;height:80px;background:var(--cream);clip-path:ellipse(55% 100% at 50% 100%);}
+  .hero-breath{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(110,158,196,0.08) 0%,transparent 70%);animation:heroBreath 10s ease-in-out infinite;pointer-events:none;}
+  @keyframes heroBreath{0%,100%{transform:translate(-50%,-50%) scale(0.8);opacity:0.5;}50%{transform:translate(-50%,-50%) scale(1.15);opacity:1;}}
+  .hero-badge{display:inline-block;font-size:0.62rem;font-weight:400;letter-spacing:0.25em;text-transform:uppercase;color:rgba(160,196,224,0.8);border:1px solid rgba(160,196,224,0.25);padding:8px 24px;border-radius:30px;margin-bottom:24px;animation:fadeUp 1s 0.3s both;position:relative;}
+  .hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,7vw,5.5rem);font-weight:300;line-height:1.1;color:var(--cream);margin-bottom:12px;animation:fadeUp 1s 0.7s both;position:relative;}
+  .hero-title em{color:#a0c4e0;font-style:italic;}
+  .hero-subtitle{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:300;font-style:italic;color:var(--gold-light);margin-bottom:32px;animation:fadeUp 1s 0.9s both;position:relative;}
+  .hero-intro{max-width:580px;font-size:0.92rem;font-weight:300;line-height:1.85;color:rgba(250,248,245,0.65);animation:fadeUp 1s 1.1s both;position:relative;}
+
+  /* NAV PROGRAMME */
+  .prog-nav{position:sticky;top:62px;z-index:90;background:rgba(250,248,245,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(110,158,196,0.1);padding:0 24px;display:flex;gap:0;overflow-x:auto;}
+  .prog-nav a{font-size:0.65rem;font-weight:300;letter-spacing:0.14em;text-transform:uppercase;color:var(--stone);text-decoration:none;padding:16px 20px;border-bottom:2px solid transparent;white-space:nowrap;transition:all 0.3s;}
+  .prog-nav a:hover,.prog-nav a.active{color:var(--blue);border-bottom-color:var(--blue);}
+
+  /* SECTIONS */
+  section{padding:80px 24px;}
+  .section-inner{max-width:900px;margin:0 auto;}
+  .section-header{display:flex;align-items:flex-start;gap:24px;margin-bottom:48px;}
+  .section-number{font-family:'Cormorant Garamond',serif;font-size:4rem;font-weight:300;color:rgba(110,158,196,0.15);line-height:1;flex-shrink:0;}
+  .section-tag{display:inline-block;font-size:0.58rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;padding:4px 14px;border-radius:20px;margin-bottom:10px;}
+  .tag-coherence{background:var(--blue-pale);color:var(--blue-deep);}
+  .tag-techniques{background:var(--sage-pale);color:var(--sage-deep);}
+  .tag-meditation{background:var(--gold-pale);color:#8a6830;}
+  .tag-temoignage{background:var(--rose-pale);color:var(--rose-deep);}
+  .tag-defi{background:var(--gold-pale);color:#8a6830;}
+  .tag-lettre{background:var(--dark);color:var(--cream);}
+  .section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3rem);font-weight:300;color:var(--dark);line-height:1.2;}
+  .section-title em{color:var(--blue);font-style:italic;}
+  .section-sub{font-size:0.82rem;font-weight:300;color:var(--stone);margin-top:8px;line-height:1.7;}
+
+  /* ══════════════════════════════
+     COHÉRENCE CARDIAQUE — OUTIL
+  ══════════════════════════════ */
+  #coherence{background:linear-gradient(160deg,#0f1a25,#152535,#0f2015);}
+  .coh-wrap{max-width:760px;margin:0 auto;text-align:center;}
+  .coh-header{margin-bottom:40px;}
+  .coh-logo{font-family:'Cormorant Garamond',serif;font-size:2.6rem;font-weight:300;color:var(--cream);margin-bottom:8px;}
+  .coh-logo em{color:#a0c4e0;font-style:italic;}
+  .coh-tagline{font-size:0.65rem;font-weight:300;letter-spacing:0.22em;text-transform:uppercase;color:rgba(160,196,224,0.6);margin-bottom:16px;}
+  .coh-desc{font-size:0.88rem;font-weight:300;color:rgba(250,248,245,0.55);line-height:1.8;max-width:520px;margin:0 auto;}
+
+  /* Cercle de respiration */
+  .breath-container{position:relative;width:300px;height:300px;margin:48px auto;display:flex;align-items:center;justify-content:center;}
+  .breath-ring{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(160,196,224,0.15);}
+  .breath-ring2{position:absolute;inset:25px;border-radius:50%;border:1px solid rgba(160,196,224,0.1);}
+  .breath-circle{
+    width:120px;height:120px;border-radius:50%;
+    background:radial-gradient(circle at 35% 35%,rgba(160,196,224,0.9),rgba(110,158,196,0.7) 60%,rgba(58,104,144,0.6));
+    box-shadow:0 0 60px rgba(110,158,196,0.5),0 0 120px rgba(110,158,196,0.2);
+    transition:transform 0.1s linear;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .breath-instruction{
+    position:absolute;bottom:-50px;left:50%;transform:translateX(-50%);
+    font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:300;font-style:italic;
+    color:var(--cream);white-space:nowrap;
+  }
+  .breath-timer{
+    font-family:'Jost',sans-serif;font-size:1.6rem;font-weight:200;color:white;
+  }
+
+  /* Contrôles */
+  .coh-controls{margin-top:80px;display:flex;flex-direction:column;align-items:center;gap:24px;}
+  .coh-start-btn{
+    display:inline-flex;align-items:center;gap:12px;
+    font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:400;letter-spacing:0.16em;text-transform:uppercase;
+    color:white;background:linear-gradient(135deg,#6e9ec4,#3a6890);
+    padding:16px 44px;border-radius:40px;border:none;cursor:pointer;
+    transition:all 0.3s;box-shadow:0 6px 24px rgba(110,158,196,0.35);
+  }
+  .coh-start-btn:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(110,158,196,0.45);}
+  .coh-session-info{font-size:0.72rem;font-weight:300;color:rgba(250,248,245,0.4);letter-spacing:0.08em;}
+  .coh-progress-wrap{width:100%;max-width:400px;display:none;}
+  .coh-progress-wrap.visible{display:block;}
+  .coh-progress-bar{width:100%;height:4px;background:rgba(255,255,255,0.1);border-radius:4px;overflow:hidden;}
+  .coh-progress-fill{height:100%;background:linear-gradient(90deg,#6e9ec4,#a0c4e0);border-radius:4px;width:0%;transition:width 1s linear;}
+  .coh-time-left{font-size:0.7rem;font-weight:300;color:rgba(250,248,245,0.4);margin-top:8px;}
+
+  /* Explication */
+  .coh-explain{margin-top:64px;background:rgba(255,255,255,0.03);border:1px solid rgba(160,196,224,0.12);border-radius:20px;padding:32px;text-align:left;}
+  .coh-explain-title{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:300;font-style:italic;color:#a0c4e0;margin-bottom:16px;}
+  .coh-explain-text{font-size:0.85rem;font-weight:300;color:rgba(250,248,245,0.6);line-height:1.85;}
+  .coh-explain-text strong{color:rgba(250,248,245,0.9);font-weight:400;}
+  .coh-explain-list{margin-top:16px;display:flex;flex-direction:column;gap:10px;}
+  .coh-explain-list li{list-style:none;font-size:0.82rem;font-weight:300;color:rgba(250,248,245,0.6);padding-left:20px;position:relative;line-height:1.7;}
+  .coh-explain-list li::before{content:'→';position:absolute;left:0;color:#6e9ec4;}
+
+  /* ══ TECHNIQUES ══ */
+  #techniques{background:var(--cream);}
+  .tech-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+  .tech-card{background:white;border-radius:22px;padding:32px 28px;border:1px solid rgba(110,158,196,0.12);transition:all 0.3s;}
+  .tech-card:hover{border-color:rgba(110,158,196,0.35);box-shadow:0 8px 30px rgba(110,158,196,0.1);}
+  .tech-icon{font-size:2.2rem;margin-bottom:16px;}
+  .tech-name{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:400;color:var(--dark);margin-bottom:4px;}
+  .tech-for{font-size:0.62rem;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--blue);margin-bottom:14px;}
+  .tech-desc{font-size:0.82rem;font-weight:300;color:var(--mid);line-height:1.75;margin-bottom:18px;}
+  .tech-steps{background:var(--blue-pale);border-radius:14px;padding:18px;}
+  .tech-steps-title{font-size:0.58rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--blue-deep);margin-bottom:10px;}
+  .tech-steps ol{padding-left:18px;display:flex;flex-direction:column;gap:6px;}
+  .tech-steps li{font-size:0.78rem;font-weight:300;color:var(--dark);line-height:1.6;}
+
+  /* MÉDITATION */
+  #meditation{background:var(--warm-white);}
+  .meditation-audio{background:linear-gradient(135deg,#0f1a25,#152535);border-radius:24px;padding:32px 36px;display:flex;align-items:center;gap:24px;margin-bottom:40px;}
+  .audio-play{width:56px;height:56px;border-radius:50%;background:var(--blue);border:none;cursor:pointer;font-size:1.2rem;color:white;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.3s;box-shadow:0 4px 20px rgba(110,158,196,0.4);}
+  .audio-play:hover{transform:scale(1.08);}
+  .audio-info{flex:1;}
+  .audio-title{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:300;color:var(--cream);margin-bottom:4px;}
+  .audio-sub{font-size:0.7rem;font-weight:300;color:rgba(250,248,245,0.5);}
+  .audio-bar{flex:1;height:4px;background:rgba(255,255,255,0.12);border-radius:4px;overflow:hidden;margin-top:12px;cursor:pointer;}
+  .audio-progress{height:100%;background:var(--blue);border-radius:4px;width:0%;}
+  .med-steps{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+  .med-step{background:white;border-radius:18px;padding:24px;border:1px solid rgba(110,158,196,0.1);}
+  .med-step-num{font-size:0.58rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--blue);margin-bottom:8px;}
+  .med-step-title{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;color:var(--dark);margin-bottom:6px;}
+  .med-step-desc{font-size:0.78rem;font-weight:300;color:var(--mid);line-height:1.7;}
+
+  /* TÉMOIGNAGE */
+  #temoignage{background:var(--cream);}
+  .temo-card{background:white;border-radius:24px;overflow:hidden;box-shadow:0 4px 30px rgba(0,0,0,0.05);}
+  .temo-header{background:linear-gradient(135deg,#0f1a25,#152535);padding:40px 48px;display:flex;gap:24px;align-items:flex-start;}
+  .temo-avatar{width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--blue-deep));display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;border:2px solid rgba(255,255,255,0.12);}
+  .temo-body{padding:40px 48px;}
+  .temo-quote-mark{font-family:'Cormorant Garamond',serif;font-size:5rem;line-height:1;color:rgba(110,158,196,0.15);margin-bottom:-24px;}
+  .temo-text{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:300;font-style:italic;color:var(--mid);line-height:1.75;}
+  .temo-reflection{background:var(--blue-pale);border-radius:16px;padding:24px;margin-top:28px;}
+  .temo-reflection-title{font-size:0.65rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--blue-deep);margin-bottom:10px;}
+  .temo-reflection-text{font-size:0.88rem;font-weight:300;color:var(--mid);line-height:1.8;}
+
+  /* DÉFI */
+  #defi{background:var(--warm-white);}
+  .defi-hero{background:linear-gradient(135deg,#0f1a25,#152535);border-radius:24px;padding:48px;text-align:center;margin-bottom:40px;}
+  .defi-hero-title{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;color:var(--cream);margin-bottom:12px;}
+  .defi-hero-title em{color:#a0c4e0;font-style:italic;}
+  .defi-hero-sub{font-size:0.82rem;font-weight:300;color:rgba(250,248,245,0.6);line-height:1.75;max-width:480px;margin:0 auto;}
+  .defi-weeks{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+  .defi-week{background:white;border-radius:18px;padding:24px;border:1px solid rgba(110,158,196,0.1);display:flex;gap:16px;cursor:pointer;transition:all 0.3s;}
+  .defi-week:hover{border-color:rgba(110,158,196,0.4);}
+  .defi-check{width:28px;height:28px;border-radius:8px;border:2px solid rgba(110,158,196,0.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.3s;font-size:0.9rem;}
+  .defi-check.checked{background:var(--blue);border-color:var(--blue);color:white;}
+  .defi-week-label{font-size:0.58rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+  .defi-week-title{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:400;color:var(--dark);margin-bottom:4px;}
+  .defi-week-desc{font-size:0.75rem;font-weight:300;color:var(--mid);line-height:1.65;}
+
+  /* LETTRE */
+  #lettre{background:#0f1a25;}
+  .lettre-inner{max-width:720px;margin:0 auto;}
+  .lettre-from{font-size:0.62rem;font-weight:300;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:32px;}
+  .lettre-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:24px;padding:52px;}
+  .lettre-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3rem);font-weight:300;color:var(--cream);line-height:1.2;margin-bottom:36px;}
+  .lettre-title em{color:#a0c4e0;font-style:italic;}
+  .lettre-body{font-size:0.95rem;font-weight:300;line-height:2;color:rgba(250,248,245,0.75);}
+  .lettre-body p+p{margin-top:20px;}
+  .lettre-body em{color:var(--sage-light);font-style:italic;}
+  .lettre-body strong{color:var(--cream);font-weight:400;}
+  .lettre-sig{margin-top:48px;padding-top:28px;border-top:1px solid rgba(255,255,255,0.08);}
+  .lettre-sig-name{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:300;font-style:italic;color:var(--sage-light);margin-bottom:4px;}
+  .lettre-sig-sub{font-size:0.7rem;font-weight:300;letter-spacing:0.14em;color:rgba(250,248,245,0.3);}
+
+  /* FOOTER */
+  footer{background:#0a1218;padding:48px 24px;text-align:center;border-top:1px solid rgba(255,255,255,0.05);}
+  .footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:300;color:var(--cream);margin-bottom:6px;}
+  .footer-logo em{color:var(--sage);font-style:italic;}
+  .footer-nav{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin:20px 0;}
+  .footer-nav a{font-size:0.65rem;font-weight:300;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250,248,245,0.3);text-decoration:none;transition:color 0.3s;}
+  .footer-nav a:hover{color:var(--sage);}
+  .footer-disclaimer{font-size:0.72rem;font-weight:300;color:rgba(250,248,245,0.2);line-height:1.7;max-width:560px;margin:0 auto;}
+
+  /* ANIMATIONS */
+  @keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+  .reveal{opacity:0;transform:translateY(32px);transition:opacity 0.8s ease,transform 0.8s ease;}
+  .reveal.visible{opacity:1;transform:translateY(0);}
+
+  @media(max-width:768px){
+    nav{padding:14px 20px;}.nav-month{display:none;}
+    .tech-grid,.med-steps,.defi-weeks{grid-template-columns:1fr;}
+    .temo-header,.temo-body{padding:28px;}
+    .lettre-card{padding:32px 24px;}
+    .meditation-audio{flex-direction:column;text-align:center;}
+    .breath-container{width:240px;height:240px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <svg width="26" height="32" viewBox="0 0 100 120" fill="none">
+      <path d="M50 5 C50 5 18 32 18 65 C18 90 32 108 50 113 C68 108 82 90 82 65 C82 32 50 5 50 5Z" fill="rgba(122,158,126,0.12)"/>
+      <path d="M50 5 C50 5 18 32 18 65 C18 90 32 108 50 113 C68 108 82 90 82 65 C82 32 50 5 50 5Z" stroke="#7a9e7e" stroke-width="1.2" fill="none"/>
+      <line x1="50" y1="10" x2="50" y2="106" stroke="#c9a96e" stroke-width="0.8" opacity="0.6"/>
+      <path d="M38 88 L50 55 L62 88" stroke="#4a7050" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <line x1="41" y1="78" x2="59" y2="78" stroke="#4a7050" stroke-width="1.8" stroke-linecap="round"/>
+      <path d="M38 65 L50 94 L62 65" stroke="#c9a96e" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.88"/>
+    </svg>
+    <span style="color:#d4a84b;font-family:'Cormorant Garamond',serif;font-weight:300;">Alpha</span>
+    <em style="color:#7a9e7e;font-family:'Cormorant Garamond',serif;font-weight:300;">Vita</em>
+  </div>
+  <div class="nav-month">Mois 4 · Juillet 2026</div>
+  <a href="index.html" class="nav-back">← Accueil</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-breath"></div>
+  <div class="hero-wave"></div>
+  <div class="hero-badge">✦ Programme mensuel · Mois 4 · Gratuit</div>
+  <p style="font-size:0.72rem;font-weight:300;letter-spacing:0.22em;text-transform:uppercase;color:rgba(250,248,245,0.4);margin-bottom:16px;animation:fadeUp 1s 0.5s both;position:relative;">Juillet 2026</p>
+  <h1 class="hero-title">La respiration<br><em>comme médicament</em></h1>
+  <p class="hero-subtitle">Le pouvoir de guérison est dans votre souffle</p>
+  <p class="hero-intro">Ce mois-ci, nous explorons l'outil le plus puissant et le plus accessible qui existe : votre respiration. Elle est gratuite, toujours disponible, et scientifiquement reconnue pour calmer le système nerveux, réduire l'anxiété et soutenir le corps dans l'épreuve.</p>
+</section>
+
+<!-- NAV PROGRAMME -->
+<div class="prog-nav">
+  <a href="#coherence" class="active">💙 Cohérence cardiaque</a>
+  <a href="#techniques">🌬️ Techniques</a>
+  <a href="#meditation">🧘 Méditation</a>
+  <a href="#temoignage">💬 Témoignage</a>
+  <a href="#defi">🌸 Défi</a>
+  <a href="#lettre">✉️ La lettre</a>
+</div>
+
+<!-- ══ 1. COHÉRENCE CARDIAQUE ══ -->
+<section id="coherence">
+  <div class="coh-wrap">
+
+    <div class="coh-header reveal">
+      <div class="coh-logo">Cohérence <em>cardiaque</em></div>
+      <div class="coh-tagline">Guide respiratoire · Par Alpha Vita</div>
+      <div class="coh-desc">Suivez le cercle avec votre souffle. Il gonfle — vous inspirez. Il se réduit — vous expirez. 5 minutes pour rééquilibrer votre système nerveux.</div>
+    </div>
+
+    <!-- CERCLE DE RESPIRATION -->
+    <div class="breath-container reveal">
+      <div class="breath-ring"></div>
+      <div class="breath-ring2"></div>
+      <div class="breath-circle" id="breathCircle">
+        <span class="breath-timer" id="breathTimer"></span>
+      </div>
+      <div class="breath-instruction" id="breathInstruction">Prêt·e ?</div>
+    </div>
+
+    <!-- CONTRÔLES -->
+    <div class="coh-controls reveal">
+      <button class="coh-start-btn" id="startBtn" onclick="toggleCoherence()">🌬️ Commencer · 5 minutes</button>
+      <div class="coh-session-info">Rythme : 5 secondes d'inspiration · 5 secondes d'expiration · 6 respirations par minute</div>
+      <div class="coh-progress-wrap" id="progressWrap">
+        <div class="coh-progress-bar"><div class="coh-progress-fill" id="progressFill"></div></div>
+        <div class="coh-time-left" id="timeLeft">5:00 restantes</div>
+      </div>
+    </div>
+
+    <!-- EXPLICATION -->
+    <div class="coh-explain reveal">
+      <div class="coh-explain-title">Pourquoi la cohérence cardiaque fonctionne</div>
+      <div class="coh-explain-text">
+        La cohérence cardiaque est une pratique validée scientifiquement. En respirant à un rythme précis de <strong>6 respirations par minute</strong>, vous synchronisez votre cœur et votre respiration — ce qui envoie un signal d'apaisement direct à votre cerveau.
+      </div>
+      <ul class="coh-explain-list">
+        <li>Réduit le cortisol — l'hormone du stress — dès la première séance</li>
+        <li>Apaise l'anxiété et les ruminations en quelques minutes</li>
+        <li>Améliore le sommeil si pratiquée avant le coucher</li>
+        <li>Soutient le système immunitaire avec une pratique régulière</li>
+        <li>Recommandée : 3 fois par jour, 5 minutes — c'est la fameuse règle du « 3-6-5 »</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ 2. TECHNIQUES ══ -->
+<section id="techniques">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-number">02</div>
+      <div>
+        <span class="section-tag tag-techniques">Techniques de respiration</span>
+        <h2 class="section-title">Quatre souffles<br>pour <em>quatre besoins</em></h2>
+        <p class="section-sub">Chaque situation a sa respiration. Choisissez celle dont vous avez besoin aujourd'hui.</p>
+      </div>
+    </div>
+
+    <div class="tech-grid">
+
+      <div class="tech-card reveal">
+        <div class="tech-icon">😴</div>
+        <div class="tech-name">La respiration 4-7-8</div>
+        <div class="tech-for">Pour s'endormir · Calmer une crise d'angoisse</div>
+        <div class="tech-desc">Développée par le Dr Andrew Weil, cette technique agit comme un tranquillisant naturel du système nerveux. Idéale au coucher ou en cas de montée d'angoisse.</div>
+        <div class="tech-steps">
+          <div class="tech-steps-title">Comment faire</div>
+          <ol>
+            <li>Inspirez par le nez en comptant jusqu'à 4</li>
+            <li>Retenez votre souffle en comptant jusqu'à 7</li>
+            <li>Expirez lentement par la bouche en comptant jusqu'à 8</li>
+            <li>Répétez 4 cycles au début, jusqu'à 8 avec l'habitude</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="tech-card reveal">
+        <div class="tech-icon">⚡</div>
+        <div class="tech-name">La respiration énergisante</div>
+        <div class="tech-for">Pour retrouver de l'énergie · Se réveiller</div>
+        <div class="tech-desc">Inspirée des techniques de respiration dynamique, elle réveille le corps et l'esprit en quelques instants. À pratiquer le matin ou lors d'un coup de fatigue — jamais le soir.</div>
+        <div class="tech-steps">
+          <div class="tech-steps-title">Comment faire</div>
+          <ol>
+            <li>Asseyez-vous le dos droit</li>
+            <li>Prenez 20 respirations rapides et profondes par le nez</li>
+            <li>À la dernière expiration, videz vos poumons et retenez 15 secondes</li>
+            <li>Inspirez profondément, retenez 10 secondes, relâchez</li>
+            <li>⚠️ Jamais en voiture, debout, ou dans l'eau. Assis·e ou allongé·e uniquement.</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="tech-card reveal">
+        <div class="tech-icon">🌊</div>
+        <div class="tech-name">La respiration abdominale</div>
+        <div class="tech-for">Pour l'anxiété quotidienne · Avant un rendez-vous médical</div>
+        <div class="tech-desc">La plus simple et la plus fondamentale. Respirer par le ventre active le nerf vague — le grand nerf de l'apaisement. Discrète, elle se pratique partout, même en salle d'attente.</div>
+        <div class="tech-steps">
+          <div class="tech-steps-title">Comment faire</div>
+          <ol>
+            <li>Posez une main sur votre ventre, une sur la poitrine</li>
+            <li>Inspirez par le nez en gonflant le ventre (pas la poitrine)</li>
+            <li>Expirez lentement par la bouche en rentrant le ventre</li>
+            <li>L'expiration doit être plus longue que l'inspiration</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="tech-card reveal">
+        <div class="tech-icon">🕯️</div>
+        <div class="tech-name">Le soupir physiologique</div>
+        <div class="tech-for">Pour un soulagement immédiat · En 30 secondes</div>
+        <div class="tech-desc">Identifié par les neuroscientifiques comme le moyen le plus rapide de calmer le système nerveux. C'est le soupir que fait naturellement le corps après les pleurs — on peut le déclencher volontairement.</div>
+        <div class="tech-steps">
+          <div class="tech-steps-title">Comment faire</div>
+          <ol>
+            <li>Inspirez profondément par le nez</li>
+            <li>Sans expirer, ajoutez une seconde petite inspiration par-dessus</li>
+            <li>Expirez très lentement et longuement par la bouche</li>
+            <li>Répétez 2 à 3 fois — l'effet est quasi immédiat</li>
+          </ol>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ 3. MÉDITATION ══ -->
+<section id="meditation">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-number">03</div>
+      <div>
+        <span class="section-tag tag-meditation">Méditation guidée</span>
+        <h2 class="section-title">Méditation<br>du <em>souffle guérisseur</em></h2>
+        <p class="section-sub">12 min · Voix de Géraldine · Laissez votre souffle prendre soin de vous</p>
+      </div>
+    </div>
+
+    <div class="meditation-audio reveal">
+      <audio id="audioPlayer" preload="metadata">
+        <source src="meditation-mois4.m4a" type="audio/mp4">
+        <source src="meditation-mois4.mp3" type="audio/mpeg">
+      </audio>
+      <button class="audio-play" id="playBtn" onclick="toggleAudio()">▶</button>
+      <div class="audio-info">
+        <div class="audio-title">Méditation du souffle guérisseur — Mois 4</div>
+        <div class="audio-sub">Votre respiration comme alliée · 12 min · Musique apaisante</div>
+        <div class="audio-bar" onclick="seekAudio(event)" style="cursor:pointer;">
+          <div class="audio-progress" id="audioProgress"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="med-steps">
+      <div class="med-step reveal">
+        <div class="med-step-num">Phase 01</div>
+        <div class="med-step-title">L'accueil du souffle · 3 min</div>
+        <div class="med-step-desc">Observez votre respiration telle qu'elle est, sans la modifier. Courte, longue, irrégulière — elle est parfaite comme elle est. Vous apprenez juste à la regarder.</div>
+      </div>
+      <div class="med-step reveal">
+        <div class="med-step-num">Phase 02</div>
+        <div class="med-step-title">L'approfondissement · 3 min</div>
+        <div class="med-step-desc">Progressivement, laissez la respiration descendre dans le ventre. Chaque inspiration nourrit, chaque expiration nettoie.</div>
+      </div>
+      <div class="med-step reveal">
+        <div class="med-step-num">Phase 03</div>
+        <div class="med-step-title">Le souffle guérisseur · 5 min</div>
+        <div class="med-step-desc">Dirigez votre souffle vers la zone de votre corps qui en a le plus besoin. Imaginez l'inspiration y apporter de la lumière, l'expiration en retirer la tension.</div>
+      </div>
+      <div class="med-step reveal">
+        <div class="med-step-num">Phase 04</div>
+        <div class="med-step-title">Le retour · 1 min</div>
+        <div class="med-step-desc">Laissez la respiration reprendre son rythme naturel. Remerciez ce souffle qui vous accompagne depuis votre premier jour.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 4. TÉMOIGNAGE ══ -->
+<section id="temoignage">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-number">04</div>
+      <div>
+        <span class="section-tag tag-temoignage">Témoignage</span>
+        <h2 class="section-title">Karim, 52 ans —<br>respirer pour <em>traverser</em></h2>
+      </div>
+    </div>
+
+    <div class="temo-card reveal">
+      <div class="temo-header">
+        <div class="temo-avatar">💙</div>
+        <div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:300;color:var(--cream);">Karim B.</div>
+          <div style="font-size:0.72rem;font-weight:300;color:rgba(250,248,245,0.5);margin-top:4px;">52 ans · Marseille · Cancer colorectal · En traitement</div>
+        </div>
+      </div>
+      <div class="temo-body">
+        <div class="temo-quote-mark">"</div>
+        <div class="temo-text">
+          Ce sont les IRM qui m'ont fait découvrir la respiration. Je suis claustrophobe, et chaque examen était une torture. La troisième fois, une manipulatrice radio m'a dit : "Monsieur, respirez avec moi. Quatre secondes dedans, six secondes dehors."<br><br>
+          Ça m'a semblé ridicule. Et puis j'ai essayé. Et pour la première fois, j'ai tenu les quarante minutes sans crise de panique.<br><br>
+          Depuis, je pratique la cohérence cardiaque trois fois par jour. Avant chaque prise de sang, chaque scanner, chaque annonce de résultats. Ce n'est pas magique — la peur est toujours là. Mais elle ne me submerge plus. J'ai un outil. Il est gratuit, toujours dans ma poche, et personne ne peut me l'enlever.<br><br>
+          Mon oncologue m'a dit un jour : "Vous êtes plus calme qu'avant." Je lui ai répondu : "Non docteur. Je respire mieux qu'avant."
+        </div>
+        <div class="temo-reflection">
+          <div class="temo-reflection-title">Ce que ce témoignage nous apprend</div>
+          <div class="temo-reflection-text">La respiration ne supprime pas la peur — elle empêche la peur de prendre toute la place. C'est un outil que chacun porte en soi, disponible à chaque instant, sans ordonnance. Et comme le dit Karim : personne ne peut vous l'enlever.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 5. DÉFI ══ -->
+<section id="defi">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-number">05</div>
+      <div>
+        <span class="section-tag tag-defi">Défi du mois</span>
+        <h2 class="section-title">Le défi<br><em>3-6-5</em></h2>
+        <p class="section-sub">4 semaines pour installer la respiration dans votre quotidien.</p>
+      </div>
+    </div>
+
+    <div class="defi-hero reveal">
+      <div class="defi-hero-title">3 fois par jour · 6 respirations par minute<br><em>5 minutes.</em></div>
+      <div class="defi-hero-sub">C'est la règle d'or de la cohérence cardiaque. Matin, midi et soir — comme un médicament. Sauf que celui-ci est gratuit et sans effet secondaire.</div>
+    </div>
+
+    <div class="defi-weeks">
+      <div class="defi-week reveal" onclick="toggleCheck(this)">
+        <div class="defi-check">○</div>
+        <div>
+          <div class="defi-week-label">Semaine 1</div>
+          <div class="defi-week-title">Une séance par jour</div>
+          <div class="defi-week-desc">Commencez doucement : une séance de 5 minutes chaque matin avec le guide de cohérence cardiaque. Juste ça. Créez l'habitude.</div>
+        </div>
+      </div>
+      <div class="defi-week reveal" onclick="toggleCheck(this)">
+        <div class="defi-check">○</div>
+        <div>
+          <div class="defi-week-label">Semaine 2</div>
+          <div class="defi-week-title">Deux séances par jour</div>
+          <div class="defi-week-desc">Ajoutez la séance du soir, avant de dormir. Observez la qualité de votre sommeil — beaucoup remarquent une différence dès cette semaine.</div>
+        </div>
+      </div>
+      <div class="defi-week reveal" onclick="toggleCheck(this)">
+        <div class="defi-check">○</div>
+        <div>
+          <div class="defi-week-label">Semaine 3</div>
+          <div class="defi-week-title">Le 3-6-5 complet</div>
+          <div class="defi-week-desc">Trois séances : matin, midi, soir. Testez aussi une technique bonus de la bibliothèque — le 4-7-8 ou le soupir physiologique.</div>
+        </div>
+      </div>
+      <div class="defi-week reveal" onclick="toggleCheck(this)">
+        <div class="defi-check">○</div>
+        <div>
+          <div class="defi-week-label">Semaine 4</div>
+          <div class="defi-week-title">Partager dans le groupe</div>
+          <div class="defi-week-desc">Partagez votre expérience dans le groupe WhatsApp. Qu'est-ce qui a changé ? Sommeil, anxiété, énergie ? Chaque retour compte.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 6. LETTRE ══ -->
+<section id="lettre">
+  <div class="lettre-inner">
+    <div class="section-header reveal">
+      <div class="section-number">06</div>
+      <div>
+        <span class="section-tag tag-lettre">La lettre du mois</span>
+        <h2 class="section-title" style="color:var(--cream);">Un mot<br><em>du cœur</em></h2>
+      </div>
+    </div>
+
+    <div class="lettre-from reveal">De l'équipe Alpha Vita — Géraldine Esther · Juillet 2026</div>
+
+    <div class="lettre-card reveal">
+      <div class="lettre-title">Le médicament<br>que vous portez <em>en vous.</em></div>
+      <div class="lettre-body">
+        <p>Il y a quelque chose que je trouve profondément beau dans la respiration.</p>
+        <p>C'est la seule fonction du corps qui soit à la fois automatique et volontaire. Votre cœur bat sans vous demander votre avis. Votre digestion travaille sans vous. Mais votre souffle — lui — vous pouvez le prendre en main à tout moment.</p>
+        <p><strong>C'est une porte d'entrée directe vers votre système nerveux.</strong> La seule qui soit toujours ouverte.</p>
+        <p>En tant qu'infirmière, j'ai vu des personnes traverser des moments très difficiles — des annonces, des attentes de résultats, des nuits d'angoisse à l'hôpital. Et j'ai remarqué une chose : ceux qui savaient respirer traversaient différemment. Pas sans peur. Pas sans douleur. Mais avec un ancrage que les autres n'avaient pas.</p>
+        <p><em>Votre souffle est votre allié le plus fidèle. Il était là à votre premier instant. Il sera là à chaque étape.</em></p>
+        <p>Ce mois-ci, je vous invite à faire connaissance avec lui. Vraiment. Trois fois par jour, cinq minutes. Comme on prendrait un traitement — sauf que celui-ci ne coûte rien et n'a que des bons effets.</p>
+        <p>Respirez. Vous êtes vivant·e. Et c'est déjà immense.</p>
+        <p>Je suis là.</p>
+      </div>
+      <div class="lettre-sig">
+        <div class="lettre-sig-name">L'équipe Alpha Vita — Géraldine Esther</div>
+        <div class="lettre-sig-sub">Corps · Esprit · Âme · Avec tout mon cœur</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Alpha <em>Vita</em></div>
+  <div class="footer-nav">
+    <a href="index.html">← Accueil</a>
+    <a href="mois1.html">Mois 1</a>
+    <a href="mois2.html">Mois 2</a>
+    <a href="mois3.html">Mois 3</a>
+    <a href="mois4.html">Mois 4</a>
+    <a href="charte.html">Charte</a>
+    <a href="dons.html">Soutenir</a>
+    <a href="https://chat.whatsapp.com/ClJfFIUomFh5Hu7wq3UpdP?mode=gi_t">WhatsApp 💬</a>
+  </div>
+  <div class="footer-disclaimer">Alpha Vita est un programme de soutien complémentaire. Il ne constitue pas un avis médical et ne remplace aucun traitement. Les techniques respiratoires présentées sont des outils de bien-être. En cas de problème respiratoire ou cardiaque, consultez votre médecin avant de pratiquer. Consultez toujours votre équipe médicale.</div>
+</footer>
+
+<script>
+// ══════════════════════════════
+//  COHÉRENCE CARDIAQUE
+// ══════════════════════════════
+let cohActive = false;
+let cohInterval = null;
+let cohStartTime = null;
+const SESSION_DURATION = 5 * 60 * 1000; // 5 minutes
+const BREATH_CYCLE = 10000; // 10 secondes (5 in + 5 out)
+
+const circle = document.getElementById('breathCircle');
+const instruction = document.getElementById('breathInstruction');
+const timerEl = document.getElementById('breathTimer');
+const startBtn = document.getElementById('startBtn');
+const progressWrap = document.getElementById('progressWrap');
+const progressFill = document.getElementById('progressFill');
+const timeLeftEl = document.getElementById('timeLeft');
+
+function toggleCoherence() {
+  if (cohActive) stopCoherence();
+  else startCoherence();
+}
+
+function startCoherence() {
+  cohActive = true;
+  cohStartTime = Date.now();
+  startBtn.textContent = '⏸ Arrêter la séance';
+  progressWrap.classList.add('visible');
+  animateBreath();
+  cohInterval = setInterval(updateSession, 100);
+}
+
+function stopCoherence() {
+  cohActive = false;
+  clearInterval(cohInterval);
+  startBtn.innerHTML = '🌬️ Commencer · 5 minutes';
+  instruction.textContent = 'Bien joué 💙';
+  timerEl.textContent = '';
+  circle.style.transform = 'scale(1)';
+  setTimeout(() => { if (!cohActive) instruction.textContent = 'Prêt·e ?'; }, 3000);
+}
+
+function animateBreath() {
+  if (!cohActive) return;
+  const elapsed = (Date.now() - cohStartTime) % BREATH_CYCLE;
+  const half = BREATH_CYCLE / 2;
+
+  if (elapsed < half) {
+    // INSPIRATION — le cercle grossit
+    const progress = elapsed / half;
+    const scale = 1 + progress * 0.8; // 1 → 1.8
+    circle.style.transform = `scale(${scale})`;
+    instruction.textContent = 'Inspirez…';
+    timerEl.textContent = Math.ceil(5 - progress * 5);
+  } else {
+    // EXPIRATION — le cercle rétrécit
+    const progress = (elapsed - half) / half;
+    const scale = 1.8 - progress * 0.8; // 1.8 → 1
+    circle.style.transform = `scale(${scale})`;
+    instruction.textContent = 'Expirez…';
+    timerEl.textContent = Math.ceil(5 - progress * 5);
+  }
+
+  requestAnimationFrame(animateBreath);
+}
+
+function updateSession() {
+  const elapsed = Date.now() - cohStartTime;
+  const remaining = SESSION_DURATION - elapsed;
+
+  if (remaining <= 0) {
+    stopCoherence();
+    instruction.textContent = 'Séance terminée 💙 Bravo !';
+    progressFill.style.width = '100%';
+    timeLeftEl.textContent = 'Terminé';
+    return;
+  }
+
+  const pct = (elapsed / SESSION_DURATION) * 100;
+  progressFill.style.width = pct + '%';
+  const min = Math.floor(remaining / 60000);
+  const sec = Math.floor((remaining % 60000) / 1000);
+  timeLeftEl.textContent = `${min}:${sec.toString().padStart(2, '0')} restantes`;
+}
+
+// Défi checkboxes
+function toggleCheck(item) {
+  const box = item.querySelector('.defi-check');
+  const done = box.textContent === '✓';
+  box.textContent = done ? '○' : '✓';
+  box.classList.toggle('checked', !done);
+}
+
+// Reveal scroll
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 60);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.06 });
+reveals.forEach(el => observer.observe(el));
+
+// Nav active
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.prog-nav a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 150) current = s.id; });
+  navLinks.forEach(a => { a.classList.toggle('active', a.getAttribute('href') === '#' + current); });
+});
+
+// Audio
+const audio = document.getElementById('audioPlayer');
+const playBtn = document.getElementById('playBtn');
+const progress = document.getElementById('audioProgress');
+function toggleAudio() {
+  if (!audio) return;
+  if (audio.paused) { audio.play(); playBtn.textContent = '⏸'; }
+  else { audio.pause(); playBtn.textContent = '▶'; }
+}
+function seekAudio(e) {
+  if (!audio || !audio.duration) return;
+  audio.currentTime = (e.offsetX / e.currentTarget.offsetWidth) * audio.duration;
+}
+if (audio) {
+  audio.addEventListener('timeupdate', () => {
+    if (audio.duration) progress.style.width = (audio.currentTime / audio.duration * 100) + '%';
+  });
+  audio.addEventListener('ended', () => { playBtn.textContent = '▶'; progress.style.width = '0%'; });
+}
+</script>
+</body>
+</html>
