@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alpha Vita — Mois 5 · Le Sommeil Réparateur</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sage:#7a9e7e;--sage-light:#a8c5ac;--sage-pale:#e8f0e9;--sage-deep:#4a7050;
+    --gold:#c9a96e;--gold-light:#e8d5b0;--gold-pale:#f5ede0;
+    --night:#5a6ca8;--night-light:#8a9cd0;--night-pale:#eaedf5;--night-deep:#3a4670;
+    --violet:#9878b8;--violet-light:#b8a0d0;
+    --rose-pale:#f5eaea;--rose-deep:#8a5858;
+    --stone:#8c8680;--cream:#faf8f5;--warm-white:#f5f2ed;--dark:#2c2a27;--mid:#5a5654;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--dark);overflow-x:hidden;}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 48px;display:flex;align-items:center;justify-content:space-between;background:rgba(250,248,245,0.93);backdrop-filter:blur(14px);border-bottom:1px solid rgba(90,108,168,0.12);}
+  .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:300;display:flex;align-items:center;gap:8px;}
+  .nav-month{font-size:0.65rem;font-weight:300;letter-spacing:0.18em;text-transform:uppercase;color:var(--stone);}
+  .nav-back{font-size:0.65rem;font-weight:300;letter-spacing:0.15em;text-transform:uppercase;color:var(--stone);text-decoration:none;transition:color 0.3s;}
+  .nav-back:hover{color:var(--sage);}
+
+  /* HERO */
+  #hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 24px 80px;position:relative;overflow:hidden;
+    background:radial-gradient(ellipse at 30% 20%,rgba(90,108,168,0.22) 0%,transparent 50%),
+               radial-gradient(ellipse at 70% 80%,rgba(152,120,184,0.15) 0%,transparent 50%),
+               linear-gradient(160deg,#0a0f1e 0%,#151a35 40%,#1a1530 100%);}
+  .hero-wave{position:absolute;bottom:0;left:0;right:0;height:80px;background:var(--cream);clip-path:ellipse(55% 100% at 50% 100%);}
+  .stars{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
+  .star{position:absolute;width:2px;height:2px;background:white;border-radius:50%;animation:twinkle var(--dur) ease-in-out infinite;opacity:0;}
+  @keyframes twinkle{0%,100%{opacity:0;}50%{opacity:var(--max);}}
+  .moon{position:absolute;top:15%;right:18%;width:80px;height:80px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#f5f0e0,#d8d0b8);box-shadow:0 0 60px rgba(245,240,224,0.4),0 0 120px rgba(245,240,224,0.2);animation:moonGlow 6s ease-in-out infinite alternate;}
+  @keyframes moonGlow{from{box-shadow:0 0 40px rgba(245,240,224,0.3);}to{box-shadow:0 0 70px rgba(245,240,224,0.5),0 0 130px rgba(245,240,224,0.25);}}
+  .hero-badge{display:inline-block;font-size:0.62rem;font-weight:400;letter-spacing:0.25em;text-transform:uppercase;color:rgba(138,156,208,0.9);border:1px solid rgba(138,156,208,0.3);padding:8px 24px;border-radius:30px;margin-bottom:24px;animation:fadeUp 1s 0.3s both;position:relative;}
+  .hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,7vw,5.5rem);font-weight:300;line-height:1.1;color:var(--cream);margin-bottom:12px;animation:fadeUp 1s 0.7s both;position:relative;}
+  .hero-title em{color:#b8a0d0;font-style:italic;}
+  .hero-subtitle{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:300;font-style:italic;color:var(--gold-light);margin-bottom:32px;animation:fadeUp 1s 0.9s both;position:relative;}
+  .hero-intro{max-width:580px;font-size:0.92rem;font-weight:300;line-height:1.85;color:rgba(250,248,245,0.65);animation:fadeUp 1s 1.1s both;position:relative;}
+
+  /* NAV PROGRAMME */
+  .prog-nav{position:sticky;top:62px;z-index:90;background:rgba(250,248,245,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(90,108,168,0.1);padding:0 24px;display:flex;gap:0;overflow-x:auto;}
+  .prog-nav a{font-size:0.65rem;font-weight:300;letter-spacing:0.14em;text-transform:uppercase;color:var(--stone);text-decoration:none;padding:16px 20px;border-bottom:2px solid transparent;white-space:nowrap;transition:all 0.3s;}
+  .prog-nav a:hover,.prog-nav a.active{color:var(--night);border-bottom-color:var(--night);}
+
+  /* SECTIONS */
+  section{padding:80px 24px;}
+  .section-inner{max-width:900px;margin:0 auto;}
+  .section-header{display:flex;align-items:flex-start;gap:24px;margin-bottom:48px;}
+  .section-number{font-family:'Cormorant Garamond',serif;font-size:4rem;font-weight:300;color:rgba(90,108,168,0.15);line-height:1;flex-shrink:0;}
+  .section-tag{display:inline-block;font-size:0.58rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;padding:4px 14px;border-radius:20px;margin-bottom:10px;}
+  .tag-sons{background:var(--night-pale);color:var(--night-deep);}
+  .tag-cerveau{background:var(--violet-light);color:#5a3a7a;}
+  .tag-dette{background:var(--gold-pale);color:#8a6830;}
+  .tag-techniques{background:var(--sage-pale);color:var(--sage-deep);}
+  .tag-temoignage{background:var(--rose-pale);color:var(--rose-deep);}
+  .tag-defi{background:var(--gold-pale);color:#8a6830;}
+  .tag-lettre{background:var(--dark);color:var(--cream);}
+  .section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3rem);font-weight:300;color:var(--dark);line-height:1.2;}
+  .section-title em{color:var(--night);font-style:italic;}
+  .section-sub{font-size:0.82rem;font-weight:300;color:var(--stone);margin-top:8px;line-height:1.7;}
+
+  /* ══════════════════════════════
+     GÉNÉRATEUR DE SONS
+  ══════════════════════════════ */
+  #sons{background:linear-gradient(160deg,#0a0f1e,#151a35,#1a1530);}
+  .sons-wrap{max-width:820px;margin:0 auto;text-align:center;}
+  .sons-header{margin-bottom:40px;}
+  .sons-logo{font-family:'Cormorant Garamond',serif;font-size:2.6rem;font-weight:300;color:var(--cream);margin-bottom:8px;}
+  .sons-logo em{color:#b8a0d0;font-style:italic;}
+  .sons-tagline{font-size:0.65rem;font-weight:300;letter-spacing:0.22em;text-transform:uppercase;color:rgba(138,156,208,0.6);margin-bottom:16px;}
+  .sons-desc{font-size:0.88rem;font-weight:300;color:rgba(250,248,245,0.55);line-height:1.8;max-width:520px;margin:0 auto;}
+
+  /* Grille de sons */
+  .sons-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:48px 0 40px;}
+  .son-card{background:rgba(255,255,255,0.04);border:1px solid rgba(138,156,208,0.15);border-radius:20px;padding:24px 14px;cursor:pointer;transition:all 0.3s;position:relative;overflow:hidden;}
+  .son-card:hover{border-color:rgba(138,156,208,0.4);background:rgba(255,255,255,0.07);transform:translateY(-3px);}
+  .son-card.active{border-color:var(--night-light);background:rgba(138,156,208,0.15);box-shadow:0 0 30px rgba(138,156,208,0.2);}
+  .son-icon{font-size:2.2rem;margin-bottom:12px;display:block;transition:transform 0.3s;}
+  .son-card.active .son-icon{animation:sonPulse 2s ease-in-out infinite;}
+  @keyframes sonPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.15);}}
+  .son-name{font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:400;color:var(--cream);letter-spacing:0.05em;margin-bottom:14px;}
+  .son-slider{width:100%;height:4px;-webkit-appearance:none;appearance:none;background:rgba(255,255,255,0.15);border-radius:4px;outline:none;cursor:pointer;opacity:0.4;transition:opacity 0.3s;}
+  .son-card.active .son-slider{opacity:1;}
+  .son-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:14px;height:14px;border-radius:50%;background:var(--night-light);cursor:pointer;box-shadow:0 0 8px rgba(138,156,208,0.6);}
+  .son-slider::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--night-light);cursor:pointer;border:none;}
+
+  /* Contrôles */
+  .sons-master{background:rgba(255,255,255,0.03);border:1px solid rgba(138,156,208,0.12);border-radius:20px;padding:28px;margin-bottom:24px;}
+  .master-status{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:var(--night-light);margin-bottom:20px;min-height:26px;}
+  .sons-timer-label{font-size:0.62rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:rgba(138,156,208,0.7);margin-bottom:14px;}
+  .timer-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+  .timer-btn{background:rgba(255,255,255,0.04);border:1px solid rgba(138,156,208,0.2);border-radius:20px;padding:8px 18px;font-family:'Jost',sans-serif;font-size:0.72rem;color:rgba(250,248,245,0.7);cursor:pointer;transition:all 0.3s;}
+  .timer-btn:hover{border-color:rgba(138,156,208,0.5);color:var(--cream);}
+  .timer-btn.active{background:var(--night);border-color:var(--night);color:white;}
+  .timer-display{font-family:'Jost',sans-serif;font-size:1.4rem;font-weight:200;color:var(--cream);margin-top:16px;letter-spacing:0.05em;}
+
+  .sons-hint{font-size:0.75rem;font-weight:300;color:rgba(250,248,245,0.4);line-height:1.7;font-style:italic;margin-top:8px;}
+
+  /* CERVEAU */
+  #cerveau{background:var(--cream);}
+  .cerveau-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+  .cerveau-card{background:white;border-radius:20px;padding:28px;border:1px solid rgba(152,120,184,0.12);transition:all 0.3s;}
+  .cerveau-card:hover{border-color:rgba(152,120,184,0.35);box-shadow:0 8px 30px rgba(152,120,184,0.1);}
+  .cerveau-icon{font-size:2rem;margin-bottom:14px;}
+  .cerveau-title{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:400;color:var(--dark);margin-bottom:8px;}
+  .cerveau-desc{font-size:0.82rem;font-weight:300;color:var(--mid);line-height:1.75;}
+
+  /* DETTE */
+  #dette{background:var(--warm-white);}
+  .dette-card{background:linear-gradient(135deg,#0a0f1e,#1a1530);border-radius:24px;padding:44px;color:var(--cream);}
+  .dette-intro{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-style:italic;color:var(--night-light);line-height:1.6;margin-bottom:24px;}
+  .dette-text{font-size:0.9rem;font-weight:300;color:rgba(250,248,245,0.7);line-height:1.9;margin-bottom:16px;}
+  .dette-text strong{color:var(--cream);font-weight:400;}
+  .dette-highlight{background:rgba(138,156,208,0.1);border-left:2px solid var(--night-light);border-radius:0 12px 12px 0;padding:20px 24px;margin-top:24px;}
+  .dette-highlight p{font-size:0.88rem;font-weight:300;color:rgba(250,248,245,0.85);line-height:1.8;font-style:italic;}
+
+  /* TECHNIQUES */
+  #techniques{background:var(--cream);}
+  .tech-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+  .tech-card{background:white;border-radius:22px;padding:28px;border:1px solid rgba(90,108,168,0.12);transition:all 0.3s;}
+  .tech-card:hover{border-color:rgba(90,108,168,0.35);box-shadow:0 8px 30px rgba(90,108,168,0.1);}
+  .tech-icon{font-size:2rem;margin-bottom:14px;}
+  .tech-name{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:400;color:var(--dark);margin-bottom:10px;}
+  .tech-desc{font-size:0.82rem;font-weight:300;color:var(--mid);line-height:1.75;}
+  .tech-desc strong{color:var(--night-deep);font-weight:500;}
+
+  /* MÉDITATION */
+  #meditation{background:var(--warm-white);}
+  .meditation-audio{background:linear-gradient(135deg,#0a0f1e,#1a1530);border-radius:24px;padding:32px 36px;display:flex;align-items:center;gap:24px;margin-bottom:20px;}
+  .audio-play{width:56px;height:56px;border-radius:50%;background:var(--night);border:none;cursor:pointer;font-size:1.2rem;color:white;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.3s;box-shadow:0 4px 20px rgba(90,108,168,0.4);}
+  .audio-play:hover{transform:scale(1.08);}
+  .audio-info{flex:1;}
+  .audio-title{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:300;color:var(--cream);margin-bottom:4px;}
+  .audio-sub{font-size:0.7rem;font-weight:300;color:rgba(250,248,245,0.5);}
+  .audio-bar{flex:1;height:4px;background:rgba(255,255,255,0.12);border-radius:4px;overflow:hidden;margin-top:12px;cursor:pointer;}
+  .audio-progress{height:100%;background:var(--night-light);border-radius:4px;width:0%;}
+  .med-note{font-size:0.78rem;font-weight:300;color:var(--mid);line-height:1.7;font-style:italic;text-align:center;}
+
+  /* TÉMOIGNAGE */
+  #temoignage{background:var(--cream);}
+  .temo-card{background:white;border-radius:24px;overflow:hidden;box-shadow:0 4px 30px rgba(0,0,0,0.05);}
+  .temo-header{background:linear-gradient(135deg,#0a0f1e,#1a1530);padding:40px 48px;display:flex;gap:24px;align-items:flex-start;}
+  .temo-avatar{width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,var(--night),var(--violet));display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;border:2px solid rgba(255,255,255,0.12);}
+  .temo-body{padding:40px 48px;}
+  .temo-quote-mark{font-family:'Cormorant Garamond',serif;font-size:5rem;line-height:1;color:rgba(90,108,168,0.15);margin-bottom:-24px;}
+  .temo-text{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:300;font-style:italic;color:var(--mid);line-height:1.75;}
+  .temo-reflection{background:var(--night-pale);border-radius:16px;padding:24px;margin-top:28px;}
+  .temo-reflection-title{font-size:0.65rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--night-deep);margin-bottom:10px;}
+  .temo-reflection-text{font-size:0.88rem;font-weight:300;color:var(--mid);line-height:1.8;}
+
+  /* DÉFI */
+  #defi{background:var(--warm-white);}
+  .defi-hero{background:linear-gradient(135deg,#0a0f1e,#1a1530);border-radius:24px;padding:48px;text-align:center;margin-bottom:40px;}
+  .defi-hero-title{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;color:var(--cream);margin-bottom:12px;}
+  .defi-hero-title em{color:#b8a0d0;font-style:italic;}
+  .defi-hero-sub{font-size:0.82rem;font-weight:300;color:rgba(250,248,245,0.6);line-height:1.75;max-width:480px;margin:0 auto;}
+  .defi-weeks{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+  .defi-week{background:white;border-radius:18px;padding:24px;border:1px solid rgba(90,108,168,0.1);display:flex;gap:16px;cursor:pointer;transition:all 0.3s;}
+  .defi-week:hover{border-color:rgba(90,108,168,0.4);}
+  .defi-check{width:28px;height:28px;border-radius:8px;border:2px solid rgba(90,108,168,0.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.3s;font-size:0.9rem;}
+  .defi-check.checked{background:var(--night);border-color:var(--night);color:white;}
+  .defi-week-label{font-size:0.58rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+  .defi-week-title{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:400;color:var(--dark);margin-bottom:4px;}
+  .defi-week-desc{font-size:0.75rem;font-weight:300;color:var(--mid);line-height:1.65;}
+
+  /* LETTRE */
+  #lettre{background:#0a0f1e;}
+  .lettre-inner{max-width:720px;margin:0 auto;}
+  .lettre-from{font-size:0.62rem;font-weight:300;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:32px;}
+  .lettre-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:24px;padding:52px;}
+  .lettre-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3rem);font-weight:300;color:var(--cream);line-height:1.2;margin-bottom:36px;}
+  .lettre-title em{color:#b8a0d0;font-style:italic;}
+  .lettre-body{font-size:0.95rem;font-weight:300;line-height:2;color:rgba(250,248,245,0.75);}
+  .lettre-body p+p{margin-top:20px;}
+  .lettre-body em{color:var(--sage-light);font-style:italic;}
+  .lettre-body strong{color:var(--cream);font-weight:400;}
+  .lettre-sig{margin-top:48px;padding-top:28px;border-top:1px solid rgba(255,255,255,0.08);}
+  .lettre-sig-name{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:300;font-style:italic;color:var(--sage-light);margin-bottom:4px;}
+  .lettre-sig-sub{font-size:0.7rem;font-weight:300;letter-spacing:0.14em;color:rgba(250,248,245,0.3);}
+
+  /* FOOTER */
+  footer{background:#060a14;padding:48px 24px;text-align:center;border-top:1px solid rgba(255,255,255,0.05);}
+  .footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:300;color:var(--cream);margin-bottom:6px;}
+  .footer-logo em{color:var(--sage);font-style:italic;}
+  .footer-nav{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin:20px 0;}
+  .footer-nav a{font-size:0.65rem;font-weight:300;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250,248,245,0.3);text-decoration:none;transition:color 0.3s;}
+  .footer-nav a:hover{color:var(--sage);}
+  .footer-disclaimer{font-size:0.72rem;font-weight:300;color:rgba(250,248,245,0.2);line-height:1.7;max-width:560px;margin:0 auto;}
+
+  /* ANIMATIONS */
+  @keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+  .reveal{opacity:0;transform:translateY(32px);transition:opacity 0.8s ease,transform 0.8s ease;}
+  .reveal.visible{opacity:1;transform:translateY(0);}
+
+  @media(max-width:768px){
+    nav{padding:14px 20px;}.nav-month{display:none;}
+    .sons-grid{grid-template-columns:repeat(2,1fr);}
+    .cerveau-grid,.tech-grid,.med-steps,.defi-weeks{grid-template-columns:1fr;}
+    .temo-header,.temo-body{padding:28px;}
+    .lettre-card{padding:32px 24px;}
+    .dette-card{padding:28px;}
+    .meditation-audio{flex-direction:column;text-align:center;}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <svg width="26" height="32" viewBox="0 0 100 120" fill="none">
+      <path d="M50 5 C50 5 18 32 18 65 C18 90 32 108 50 113 C68 108 82 90 82 65 C82 32 50 5 50 5Z" fill="rgba(122,158,126,0.12)"/>
+      <path d="M50 5 C50 5 18 32 18 65 C18 90 32 108 50 113 C68 108 82 90 82 65 C82 32 50 5 50 5Z" stroke="#7a9e7e" stroke-width="1.2" fill="none"/>
+      <line x1="50" y1="10" x2="50" y2="106" stroke="#c9a96e" stroke-width="0.8" opacity="0.6"/>
+      <path d="M38 88 L50 55 L62 88" stroke="#4a7050" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <line x1="41" y1="78" x2="59" y2="78" stroke="#4a7050" stroke-width="1.8" stroke-linecap="round"/>
+      <path d="M38 65 L50 94 L62 65" stroke="#c9a96e" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.88"/>
+    </svg>
+    <span style="color:#d4a84b;font-family:'Cormorant Garamond',serif;font-weight:300;">Alpha</span>
+    <em style="color:#7a9e7e;font-family:'Cormorant Garamond',serif;font-weight:300;">Vita</em>
+  </div>
+  <div class="nav-month">Mois 5 · Août 2026</div>
+  <a href="index.html" class="nav-back">← Accueil</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="stars" id="stars"></div>
+  <div class="moon"></div>
+  <div class="hero-wave"></div>
+  <div class="hero-badge">✦ Programme mensuel · Mois 5 · Gratuit</div>
+  <p style="font-size:0.72rem;font-weight:300;letter-spacing:0.22em;text-transform:uppercase;color:rgba(250,248,245,0.4);margin-bottom:16px;animation:fadeUp 1s 0.5s both;position:relative;">Août 2026</p>
+  <h1 class="hero-title">Le sommeil<br><em>réparateur</em></h1>
+  <p class="hero-subtitle">Retrouver le chemin de vos nuits</p>
+  <p class="hero-intro">Ce mois-ci, nous prenons soin de vos nuits. Le sommeil n'est pas une pause — c'est le moment où votre corps se répare, où votre cerveau se nettoie, où vos émotions se rangent. Comprenons-le, respectons-le, et retrouvons ensemble le chemin d'un repos profond.</p>
+</section>
+
+<!-- NAV PROGRAMME -->
+<div class="prog-nav">
+  <a href="#sons" class="active">🎵 Générateur de sons</a>
+  <a href="#cerveau">🧠 Pendant le sommeil</a>
+  <a href="#dette">🌙 La dette de sommeil</a>
+  <a href="#techniques">🌿 Mieux dormir</a>
+  <a href="#temoignage">💬 Témoignage</a>
+  <a href="#defi">🌸 Défi</a>
+  <a href="#lettre">✉️ La lettre</a>
+</div>
+
+<!-- ══ 1. GÉNÉRATEUR DE SONS ══ -->
+<section id="sons">
+  <div class="sons-wrap">
+
+    <div class="sons-header reveal">
+      <div class="sons-logo">Cocon <em>sonore</em></div>
+      <div class="sons-tagline">Générateur d'ambiance · Par Alpha Vita</div>
+      <div class="sons-desc">Composez votre bulle sonore pour vous endormir. Mélangez les sons, ajustez le volume de chacun, et laissez-vous envelopper. Réglez un minuteur pour qu'il s'arrête tout seul.</div>
+    </div>
+
+    <!-- Grille de sons -->
+    <div class="sons-grid reveal">
+      <div class="son-card" data-sound="pluie" onclick="toggleSon('pluie')">
+        <span class="son-icon">🌧️</span>
+        <div class="son-name">Pluie douce</div>
+        <input type="range" class="son-slider" min="0" max="100" value="60" oninput="setVolume('pluie',this.value)" onclick="event.stopPropagation()">
+      </div>
+      <div class="son-card" data-sound="vagues" onclick="toggleSon('vagues')">
+        <span class="son-icon">🌊</span>
+        <div class="son-name">Vagues océan</div>
+        <input type="range" class="son-slider" min="0" max="100" value="60" oninput="setVolume('vagues',this.value)" onclick="event.stopPropagation()">
+      </div>
+      <div class="son-card" data-sound="orage" onclick="toggleSon('orage')">
+        <span class="son-icon">⛈️</span>
+        <div class="son-name">Orage lointain</div>
+        <input type="range" class="son-slider" min="0" max="100" value="60" oninput="setVolume('orage',this.value)" onclick="event.stopPropagation()">
+      </div>
+      <div class="son-card" data-sound="vent" onclick="toggleSon('vent')">
+        <span class="son-icon">🍃</span>
+        <div class="son-name">Vent léger</div>
+        <input type="range" class="son-slider" min="0" max="100" value="60" oninput="setVolume('vent',this.value)" onclick="event.stopPropagation()">
+      </div>
+      <div class="son-card" data-sound="coeur" onclick="toggleSon('coeur')">
+        <span class="son-icon">💓</span>
+        <div class="son-name">Battements de cœur</div>
+        <input type="range" class="son-slider" min="0" max="100" value="60" oninput="setVolume('coeur',this.value)" onclick="event.stopPropagation()">
+      </div>
+      <div class="son-card" data-sound="ruisseau" onclick="toggleSon('ruisseau')">
+        <span class="son-icon">💧</span>
+        <div class="son-name">Ruisseau</div>
+        <input type="range" class="son-slider" min="0" max="100" value="60" oninput="setVolume('ruisseau',this.value)" onclick="event.stopPropagation()">
+      </div>
+      <div class="son-card" data-sound="blanc" onclick="toggleSon('blanc')">
+        <span class="son-icon">☁️</span>
+        <div class="son-name">Bruit blanc</div>
+        <input type="range" class="son-slider" min="0" max="100" value="60" oninput="setVolume('blanc',this.value)" onclick="event.stopPropagation()">
+      </div>
+      <div class="son-card" data-sound="bols" onclick="toggleSon('bols')">
+        <span class="son-icon">🎐</span>
+        <div class="son-name">Bols tibétains</div>
+        <input type="range" class="son-slider" min="0" max="100" value="60" oninput="setVolume('bols',this.value)" onclick="event.stopPropagation()">
+      </div>
+    </div>
+
+    <!-- Master -->
+    <div class="sons-master reveal">
+      <div class="master-status" id="masterStatus">Touchez un son pour commencer 🌙</div>
+      <div class="sons-timer-label">Minuteur d'arrêt automatique</div>
+      <div class="timer-btns">
+        <div class="timer-btn active" onclick="setTimer(0,this)">∞ Continu</div>
+        <div class="timer-btn" onclick="setTimer(15,this)">15 min</div>
+        <div class="timer-btn" onclick="setTimer(30,this)">30 min</div>
+        <div class="timer-btn" onclick="setTimer(45,this)">45 min</div>
+        <div class="timer-btn" onclick="setTimer(60,this)">1 heure</div>
+      </div>
+      <div class="timer-display" id="timerDisplay"></div>
+    </div>
+    <p class="sons-hint reveal">💡 Astuce : baissez la luminosité de votre écran, posez votre téléphone à côté de vous, et laissez le minuteur éteindre les sons pendant que vous glissez vers le sommeil.</p>
+
+  </div>
+</section>
+
+<!-- ══ 2. CE QUI SE PASSE DANS LE CERVEAU ══ -->
+<section id="cerveau">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-number">02</div>
+      <div>
+        <span class="section-tag tag-cerveau">Les coulisses de vos nuits</span>
+        <h2 class="section-title">Ce qui se passe<br>quand vous <em>dormez</em></h2>
+        <p class="section-sub">Le sommeil n'est pas du temps perdu. C'est le moment où votre corps prend soin de vous.</p>
+      </div>
+    </div>
+
+    <div class="cerveau-grid">
+      <div class="cerveau-card reveal">
+        <div class="cerveau-icon">🧠</div>
+        <div class="cerveau-title">Votre cerveau fait le ménage</div>
+        <div class="cerveau-desc">Pendant le sommeil profond, un liquide circule dans votre cerveau et évacue les déchets accumulés dans la journée. Un véritable "lavage" — au sens propre. Et cela ne se produit presque que lorsque vous dormez.</div>
+      </div>
+      <div class="cerveau-card reveal">
+        <div class="cerveau-icon">🛡️</div>
+        <div class="cerveau-title">Un bouclier pour la mémoire</div>
+        <div class="cerveau-desc">Parmi les déchets évacués : des protéines toxiques, les mêmes qui sont impliquées dans certaines maladies de la mémoire. Bien dormir, c'est protéger son cerveau pour les années à venir.</div>
+      </div>
+      <div class="cerveau-card reveal">
+        <div class="cerveau-icon">🌊</div>
+        <div class="cerveau-title">Vos nuits avancent par vagues</div>
+        <div class="cerveau-desc">On dort par cycles d'environ 90 minutes, répétés 4 à 6 fois par nuit : sommeil léger, sommeil profond (le corps se répare), puis sommeil des rêves (les émotions se rangent). Une nuit hachée casse ces cycles.</div>
+      </div>
+      <div class="cerveau-card reveal">
+        <div class="cerveau-icon">💫</div>
+        <div class="cerveau-title">Votre corps se répare</div>
+        <div class="cerveau-desc">Durant le sommeil profond, le corps libère des hormones qui réparent les tissus, les muscles et les cellules. Vous ne faites pas "rien" quand vous dormez : vous vous reconstruisez, en profondeur.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 3. LA DETTE DE SOMMEIL ══ -->
+<section id="dette">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-number">03</div>
+      <div>
+        <span class="section-tag tag-dette">Comprendre</span>
+        <h2 class="section-title">La dette<br>de <em>sommeil</em></h2>
+        <p class="section-sub">Pourquoi on ne rattrape pas ses nuits perdues aussi facilement qu'on le croit.</p>
+      </div>
+    </div>
+
+    <div class="dette-card reveal">
+      <div class="dette-intro">Dès qu'on dort moins que nécessaire, le manque s'accumule — nuit après nuit, comme une dette.</div>
+      <div class="dette-text">Et voici le piège que beaucoup ressentent sans se l'expliquer : <strong>quand on est trop fatigué, on n'arrive pas forcément à mieux dormir la nuit suivante.</strong></div>
+      <div class="dette-text">Pourquoi ? Parce que le manque de sommeil met le corps en état de stress. Il libère alors davantage de <strong>cortisol</strong> et d'<strong>adrénaline</strong> — des hormones qui nous gardent en alerte. Au lieu de s'effondrer, le corps s'excite. C'est ce "second souffle" nerveux qu'on ressent parfois le soir. Et ce cortisol bloque la <strong>mélatonine</strong>, l'hormone du sommeil. Résultat : épuisé… mais incapable de dormir.</div>
+      <div class="dette-text">On ne rembourse donc pas une dette en une seule nuit. Il faut <strong>plusieurs nuits régulières et douces</strong> pour la combler peu à peu.</div>
+      <div class="dette-highlight">
+        <p>La clé ? Quand la fatigue vous garde éveillé·e malgré tout, ce n'est pas dans votre tête — c'est votre corps en alerte. La solution n'est pas de forcer, mais d'apaiser. C'est là que la respiration et la cohérence cardiaque (Mois 4) deviennent vos alliées : elles font baisser le stress et rouvrent la porte du sommeil. 💙</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 4. MIEUX DORMIR ══ -->
+<section id="techniques">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-number">04</div>
+      <div>
+        <span class="section-tag tag-techniques">Les bons réflexes</span>
+        <h2 class="section-title">Créer le nid<br>d'un beau <em>sommeil</em></h2>
+        <p class="section-sub">Quelques gestes simples qui préparent le corps et l'esprit au repos.</p>
+      </div>
+    </div>
+
+    <div class="tech-grid">
+      <div class="tech-card reveal">
+        <div class="tech-icon">🌡️</div>
+        <div class="tech-name">La fraîcheur</div>
+        <div class="tech-desc">Une chambre autour de <strong>18°C</strong>. Pour s'endormir, le corps a besoin d'abaisser sa température interne. Une pièce trop chaude empêche cette descente naturelle et fragmente le sommeil.</div>
+      </div>
+      <div class="tech-card reveal">
+        <div class="tech-icon">💡</div>
+        <div class="tech-name">La lumière, votre horloge</div>
+        <div class="tech-desc">Lumière du jour dès le matin pour régler votre horloge interne, et lumière <strong>tamisée le soir</strong>. On coupe les écrans avant le coucher : leur lumière bleue bloque la mélatonine et retarde l'endormissement.</div>
+      </div>
+      <div class="tech-card reveal">
+        <div class="tech-icon">🚂</div>
+        <div class="tech-name">Attraper son "train"</div>
+        <div class="tech-desc">Les signes d'endormissement (bâillements, paupières lourdes, yeux qui piquent) passent par vagues, environ toutes les <strong>90 minutes</strong>. Si on rate son train, on attend le suivant. Dès que les signes arrivent → au lit.</div>
+      </div>
+      <div class="tech-card reveal">
+        <div class="tech-icon">🛏️</div>
+        <div class="tech-name">Le lit = le sommeil</div>
+        <div class="tech-desc">Si le sommeil ne vient pas au bout de 20-30 min, mieux vaut se lever, faire une activité calme dans la pénombre, et revenir se coucher au train suivant. Le lit doit rester associé au repos, pas à l'agitation.</div>
+      </div>
+      <div class="tech-card reveal">
+        <div class="tech-icon">☕</div>
+        <div class="tech-name">Attention aux excitants</div>
+        <div class="tech-desc">Café, thé, sodas, mais aussi <strong>chocolat</strong> et alcool : à limiter en fin de journée. La caféine reste active plusieurs heures, et l'alcool fragmente le sommeil profond même s'il aide à s'assoupir.</div>
+      </div>
+      <div class="tech-card reveal">
+        <div class="tech-icon">🌙</div>
+        <div class="tech-name">Un sas de décompression</div>
+        <div class="tech-desc">Accordez-vous au moins <strong>30 minutes</strong> de transition avant de dormir. Ne vous couchez pas juste après une activité intense ou stressante. Créez un petit rituel doux : tisane, lecture, respiration, sons apaisants.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 5. TÉMOIGNAGE ══ -->
+<section id="temoignage">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-number">05</div>
+      <div>
+        <span class="section-tag tag-temoignage">Témoignage</span>
+        <h2 class="section-title">Sophie, 39 ans —<br>la nuit qui <em>fait peur</em></h2>
+      </div>
+    </div>
+
+    <div class="temo-card reveal">
+      <div class="temo-header">
+        <div class="temo-avatar">🌙</div>
+        <div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:300;color:var(--cream);">Sophie L.</div>
+          <div style="font-size:0.72rem;font-weight:300;color:rgba(250,248,245,0.5);margin-top:4px;">39 ans · Lyon · Cancer du sein · En rémission</div>
+        </div>
+      </div>
+      <div class="temo-body">
+        <div class="temo-quote-mark">"</div>
+        <div class="temo-text">
+          Pendant ma maladie, j'ai développé une peur du soir. Dès que la nuit tombait, l'angoisse montait. Le lit était devenu l'endroit où les pensées les plus sombres venaient me trouver, dans le silence.<br><br>
+          Je redoutais tellement de ne pas dormir que… je ne dormais plus. Je fixais le plafond, le cœur battant, en calculant combien d'heures il me restait. Plus je voulais dormir, moins j'y arrivais.<br><br>
+          Ce qui m'a sauvée, c'est d'arrêter de me battre. J'ai compris que forcer le sommeil, c'était l'éloigner. Alors j'ai commencé à mettre des sons de pluie, à respirer lentement, à me dire "si je ne dors pas, je me repose, et c'est déjà bien".<br><br>
+          Le paradoxe, c'est qu'en lâchant la pression… le sommeil est revenu. Doucement. Il avait juste besoin que je lui fasse de la place.
+        </div>
+        <div class="temo-reflection">
+          <div class="temo-reflection-title">Ce que ce témoignage nous apprend</div>
+          <div class="temo-reflection-text">La peur de ne pas dormir est l'un des plus grands ennemis du sommeil. Vouloir dormir à tout prix crée une tension qui éloigne le repos. Apprendre à lâcher, à s'apaiser sans exiger le sommeil, c'est souvent ce qui lui permet de revenir.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 6. DÉFI ══ -->
+<section id="defi">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-number">06</div>
+      <div>
+        <span class="section-tag tag-defi">Défi du mois</span>
+        <h2 class="section-title">Le rituel<br>du <em>coucher</em></h2>
+        <p class="section-sub">4 semaines pour offrir à vos nuits l'attention qu'elles méritent.</p>
+      </div>
+    </div>
+
+    <div class="defi-hero reveal">
+      <div class="defi-hero-title">Un petit rituel,<br><em>chaque soir.</em></div>
+      <div class="defi-hero-sub">Le corps adore les repères. Un rituel répété chaque soir devient un signal : "il est temps de se reposer". Peu à peu, le sommeil vient plus naturellement.</div>
+    </div>
+
+    <div class="defi-weeks">
+      <div class="defi-week reveal" onclick="toggleCheck(this)">
+        <div class="defi-check">○</div>
+        <div>
+          <div class="defi-week-label">Semaine 1</div>
+          <div class="defi-week-title">Créer son cocon sonore</div>
+          <div class="defi-week-desc">Chaque soir, testez le générateur de sons. Trouvez votre ambiance préférée — pluie, vagues, feu… — et laissez-la vous accompagner vers le sommeil.</div>
+        </div>
+      </div>
+      <div class="defi-week reveal" onclick="toggleCheck(this)">
+        <div class="defi-check">○</div>
+        <div>
+          <div class="defi-week-label">Semaine 2</div>
+          <div class="defi-week-title">Baisser les lumières</div>
+          <div class="defi-week-desc">Une heure avant de dormir, tamisez les lumières et posez les écrans. Observez si l'endormissement devient plus doux.</div>
+        </div>
+      </div>
+      <div class="defi-week reveal" onclick="toggleCheck(this)">
+        <div class="defi-check">○</div>
+        <div>
+          <div class="defi-week-label">Semaine 3</div>
+          <div class="defi-week-title">Respirer avant de dormir</div>
+          <div class="defi-week-desc">Ajoutez 5 minutes de cohérence cardiaque (Mois 4) ou de respiration lente au coucher. Le corps apprend à s'apaiser sur commande.</div>
+        </div>
+      </div>
+      <div class="defi-week reveal" onclick="toggleCheck(this)">
+        <div class="defi-check">○</div>
+        <div>
+          <div class="defi-week-label">Semaine 4</div>
+          <div class="defi-week-title">Partager dans le groupe</div>
+          <div class="defi-week-desc">Racontez dans le groupe WhatsApp ce qui a changé pour vos nuits ce mois-ci. Votre expérience peut aider quelqu'un d'autre à mieux dormir.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 7. LETTRE ══ -->
+<section id="lettre">
+  <div class="lettre-inner">
+    <div class="section-header reveal">
+      <div class="section-number">07</div>
+      <div>
+        <span class="section-tag tag-lettre">La lettre du mois</span>
+        <h2 class="section-title" style="color:var(--cream);">Un mot<br><em>du cœur</em></h2>
+      </div>
+    </div>
+
+    <div class="lettre-from reveal">De l'équipe Alpha Vita — Géraldine Esther · Août 2026</div>
+
+    <div class="lettre-card reveal">
+      <div class="lettre-title">Offrez à vos nuits<br>la douceur <em>qu'elles méritent.</em></div>
+      <div class="lettre-body">
+        <p>En tant qu'infirmière, j'ai veillé beaucoup de nuits. Et j'ai vu combien la nuit peut être différente selon les personnes.</p>
+        <p>Pour certains, elle est un refuge. Pour d'autres — surtout quand on traverse une épreuve — elle devient un moment redouté. Le silence, l'obscurité, et soudain toutes les pensées qui reviennent, plus fortes que le jour.</p>
+        <p><strong>Si vos nuits sont difficiles en ce moment, sachez que vous n'êtes pas seul·e.</strong> Et sachez surtout que ce n'est pas une fatalité.</p>
+        <p>Le sommeil est fragile, c'est vrai. Mais il est aussi fidèle : il ne demande qu'à revenir, si on lui fait de la place. Il n'aime pas qu'on le force, qu'on le supplie, qu'on l'attende avec angoisse. Il aime la douceur, la régularité, le lâcher-prise.</p>
+        <p><em>Alors ce mois-ci, ne cherchez pas à "réussir" vos nuits. Cherchez juste à les accueillir avec plus de douceur.</em></p>
+        <p>Un cocon sonore. Une lumière tamisée. Une respiration lente. Et cette petite phrase qui change tout : "si je ne dors pas encore, je me repose, et c'est déjà précieux".</p>
+        <p>Vos nuits prendront soin de vous, si vous prenez soin d'elles.</p>
+        <p>Je vous souhaite des nuits douces. Je suis là.</p>
+      </div>
+      <div class="lettre-sig">
+        <div class="lettre-sig-name">L'équipe Alpha Vita — Géraldine Esther</div>
+        <div class="lettre-sig-sub">Corps · Esprit · Âme · Avec tout mon cœur</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Alpha <em>Vita</em></div>
+  <div class="footer-nav">
+    <a href="index.html">← Accueil</a>
+    <a href="mois1.html">Mois 1</a>
+    <a href="mois2.html">Mois 2</a>
+    <a href="mois3.html">Mois 3</a>
+    <a href="mois4.html">Mois 4</a>
+    <a href="charte.html">Charte</a>
+    <a href="dons.html">Soutenir</a>
+    <a href="https://chat.whatsapp.com/ClJfFIUomFh5Hu7wq3UpdP?mode=gi_t">WhatsApp 💬</a>
+  </div>
+  <div class="footer-disclaimer">Alpha Vita est un programme de soutien complémentaire. Il ne constitue pas un avis médical et ne remplace aucun traitement. En cas de troubles du sommeil persistants, consultez votre médecin. Consultez toujours votre équipe médicale.</div>
+</footer>
+
+<script>
+// ══════════════════════════════
+//  GÉNÉRATEUR DE SONS (Web Audio API - sons synthétisés)
+// ══════════════════════════════
+let audioCtx = null;
+const sounds = {};
+const activeSounds = {};
+
+function initAudio() {
+  if (!audioCtx) {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+}
+
+// Générateur de bruit de base (buffer)
+function createNoiseBuffer() {
+  const bufferSize = 2 * audioCtx.sampleRate;
+  const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+  const data = buffer.getChannelData(0);
+  for (let i = 0; i < bufferSize; i++) {
+    data[i] = Math.random() * 2 - 1;
+  }
+  return buffer;
+}
+
+// Crée un son selon son type
+function createSound(type) {
+  initAudio();
+  const gain = audioCtx.createGain();
+  gain.gain.value = 0.6;
+  gain.connect(audioCtx.destination);
+
+  const noise = audioCtx.createBufferSource();
+  noise.buffer = createNoiseBuffer();
+  noise.loop = true;
+
+  const filter = audioCtx.createBiquadFilter();
+
+  // Chaque son a sa signature sonore
+  switch(type) {
+    case 'pluie':
+      filter.type = 'highpass'; filter.frequency.value = 1000;
+      break;
+    case 'vagues':
+      filter.type = 'lowpass'; filter.frequency.value = 500;
+      // LFO pour l'effet de vagues
+      const lfo = audioCtx.createOscillator();
+      const lfoGain = audioCtx.createGain();
+      lfo.frequency.value = 0.15; lfoGain.gain.value = 0.4;
+      lfo.connect(lfoGain); lfoGain.connect(gain.gain); lfo.start();
+      break;
+    case 'orage':
+      // Orage : pluie + grondements de tonnerre aléatoires
+      filter.type = 'lowpass'; filter.frequency.value = 400;
+      const thunderGain = audioCtx.createGain();
+      thunderGain.gain.value = 0;
+      const thunderOsc = audioCtx.createOscillator();
+      thunderOsc.type = 'sine'; thunderOsc.frequency.value = 50;
+      thunderOsc.connect(thunderGain); thunderGain.connect(gain);
+      thunderOsc.start();
+      const rumble = () => {
+        if (!activeSounds['orage']) return;
+        const now = audioCtx.currentTime;
+        thunderGain.gain.cancelScheduledValues(now);
+        thunderGain.gain.setValueAtTime(0, now);
+        thunderGain.gain.linearRampToValueAtTime(0.5, now + 0.3);
+        thunderGain.gain.exponentialRampToValueAtTime(0.001, now + 2.5);
+        setTimeout(rumble, 4000 + Math.random() * 8000);
+      };
+      setTimeout(rumble, 2000 + Math.random() * 3000);
+      break;
+    case 'vent':
+      filter.type = 'lowpass'; filter.frequency.value = 800;
+      const lfo2 = audioCtx.createOscillator();
+      const lfoGain2 = audioCtx.createGain();
+      lfo2.frequency.value = 0.3; lfoGain2.gain.value = 0.2;
+      lfo2.connect(lfoGain2); lfoGain2.connect(filter.frequency); lfo2.start();
+      break;
+    case 'coeur':
+      // Battements de cœur : deux pulsations graves régulières (lub-dub)
+      noise.disconnect();
+      const heartGain = audioCtx.createGain();
+      heartGain.gain.value = 0;
+      heartGain.connect(gain);
+      const heartOsc = audioCtx.createOscillator();
+      heartOsc.type = 'sine'; heartOsc.frequency.value = 60;
+      heartOsc.connect(heartGain);
+      heartOsc.start();
+      const beat = () => {
+        if (!activeSounds['coeur']) return;
+        const now = audioCtx.currentTime;
+        // Premier battement (lub)
+        heartGain.gain.setValueAtTime(0, now);
+        heartGain.gain.linearRampToValueAtTime(0.8, now + 0.05);
+        heartGain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+        // Deuxième battement (dub)
+        heartGain.gain.setValueAtTime(0, now + 0.3);
+        heartGain.gain.linearRampToValueAtTime(0.5, now + 0.35);
+        heartGain.gain.exponentialRampToValueAtTime(0.001, now + 0.55);
+        setTimeout(beat, 1100); // ~55 battements/min, rythme apaisant
+      };
+      beat();
+      return { gain, nodes: [heartOsc] };
+    case 'ruisseau':
+      filter.type = 'highpass'; filter.frequency.value = 1500;
+      const lfo4 = audioCtx.createOscillator();
+      const lfoGain4 = audioCtx.createGain();
+      lfo4.frequency.value = 3; lfoGain4.gain.value = 0.1;
+      lfo4.connect(lfoGain4); lfoGain4.connect(gain.gain); lfo4.start();
+      break;
+    case 'blanc':
+      filter.type = 'lowpass'; filter.frequency.value = 8000;
+      break;
+    case 'bols':
+      // Bols tibétains : tons harmoniques
+      noise.disconnect();
+      const osc1 = audioCtx.createOscillator();
+      const osc2 = audioCtx.createOscillator();
+      osc1.frequency.value = 136.1; osc1.type = 'sine';
+      osc2.frequency.value = 204.2; osc2.type = 'sine';
+      const bolGain = audioCtx.createGain();
+      bolGain.gain.value = 0.3;
+      osc1.connect(bolGain); osc2.connect(bolGain); bolGain.connect(gain);
+      osc1.start(); osc2.start();
+      return { gain, nodes: [osc1, osc2] };
+  }
+
+  noise.connect(filter);
+  filter.connect(gain);
+  noise.start();
+  return { gain, nodes: [noise] };
+}
+
+function toggleSon(type) {
+  initAudio();
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+
+  const card = document.querySelector(`[data-sound="${type}"]`);
+
+  if (activeSounds[type]) {
+    // Arrêter
+    activeSounds[type].nodes.forEach(n => { try { n.stop(); } catch(e){} });
+    activeSounds[type].gain.disconnect();
+    delete activeSounds[type];
+    card.classList.remove('active');
+  } else {
+    // Démarrer
+    const slider = card.querySelector('.son-slider');
+    const sound = createSound(type);
+    sound.gain.gain.value = slider.value / 100 * 0.6;
+    activeSounds[type] = sound;
+    card.classList.add('active');
+  }
+  updateStatus();
+}
+
+function setVolume(type, val) {
+  if (activeSounds[type]) {
+    activeSounds[type].gain.gain.value = val / 100 * 0.6;
+  }
+}
+
+function updateStatus() {
+  const count = Object.keys(activeSounds).length;
+  const status = document.getElementById('masterStatus');
+  if (count === 0) status.textContent = 'Touchez un son pour commencer 🌙';
+  else if (count === 1) status.textContent = 'Votre cocon sonore est actif 🌙';
+  else status.textContent = `${count} sons mélangés — quelle belle ambiance 🌙`;
+}
+
+// Minuteur
+let timerInterval = null;
+let timerEnd = null;
+
+function setTimer(minutes, btn) {
+  document.querySelectorAll('.timer-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const display = document.getElementById('timerDisplay');
+
+  if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
+
+  if (minutes === 0) {
+    display.textContent = '';
+    return;
+  }
+
+  timerEnd = Date.now() + minutes * 60000;
+  updateTimerDisplay();
+  timerInterval = setInterval(() => {
+    const remaining = timerEnd - Date.now();
+    if (remaining <= 0) {
+      // Fade out et stop tous les sons
+      Object.keys(activeSounds).forEach(type => {
+        const sound = activeSounds[type];
+        sound.gain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 3);
+        setTimeout(() => toggleSon(type), 3200);
+      });
+      clearInterval(timerInterval); timerInterval = null;
+      display.textContent = 'Bonne nuit 🌙';
+      return;
+    }
+    updateTimerDisplay();
+  }, 1000);
+}
+
+function updateTimerDisplay() {
+  const remaining = Math.max(0, timerEnd - Date.now());
+  const min = Math.floor(remaining / 60000);
+  const sec = Math.floor((remaining % 60000) / 1000);
+  document.getElementById('timerDisplay').textContent = `⏱ ${min}:${sec.toString().padStart(2,'0')}`;
+}
+
+// Étoiles animées
+function initStars() {
+  const container = document.getElementById('stars');
+  for (let i = 0; i < 40; i++) {
+    const star = document.createElement('div');
+    star.className = 'star';
+    star.style.left = Math.random() * 100 + '%';
+    star.style.top = Math.random() * 70 + '%';
+    star.style.setProperty('--dur', (2 + Math.random() * 4) + 's');
+    star.style.setProperty('--max', (0.3 + Math.random() * 0.7).toFixed(2));
+    star.style.animationDelay = Math.random() * 5 + 's';
+    container.appendChild(star);
+  }
+}
+
+// Défi checkboxes
+function toggleCheck(item) {
+  const box = item.querySelector('.defi-check');
+  const done = box.textContent === '✓';
+  box.textContent = done ? '○' : '✓';
+  box.classList.toggle('checked', !done);
+}
+
+// Reveal scroll
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 60);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.06 });
+reveals.forEach(el => observer.observe(el));
+
+// Nav active
+const navSections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.prog-nav a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  navSections.forEach(s => { if (window.scrollY >= s.offsetTop - 150) current = s.id; });
+  navLinks.forEach(a => { a.classList.toggle('active', a.getAttribute('href') === '#' + current); });
+});
+
+initStars();
+</script>
+</body>
+</html>
